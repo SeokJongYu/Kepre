@@ -79,6 +79,8 @@ GEM
       jquery-rails
     font-awesome-sass (4.7.0)
       sass (>= 3.2)
+    friendly_id (5.1.0)
+      activerecord (>= 4.0.0)
     gentelella-rails (0.1.11)
       bootstrap-daterangepicker-rails (>= 0.1.7)
       bootstrap-sass (~> 3.3.6)
@@ -229,6 +231,7 @@ DEPENDENCIES
   byebug
   capybara (~> 2.13)
   coffee-rails (~> 4.2)
+  friendly_id (~> 5.1.0)
   gentelella-rails
   jbuilder (~> 2.5)
   jquery-rails
