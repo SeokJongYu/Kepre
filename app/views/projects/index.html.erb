@@ -1,31 +1,135 @@
+<% provide(:title, 'All Projects') %>
+
 <p id="notice"><%= notice %></p>
 
 <h1>Projects</h1>
+<!-- top tiles -->
+<div class="row tile_count">
+  <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+    <span class="count_top"><i class="fa fa-archive"></i> Total Project</span>
+    <div class="count">3</div>
+    <span class="count_bottom">last access <i class="green">Dec 4 2017</i> </span>
+  </div>
+  <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+    <span class="count_top"><i class="fa fa-clock-o"></i> Average Time</span>
+    <div class="count">123.50</div>
+    <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>3% </i> From last Week</span>
+  </div>
+  <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+    <span class="count_top"><i class="fa fa-flash"></i> Total Execution</span>
+    <div class="count green">34</div>
+    <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>34% </i> From last Week</span>
+  </div>
+  <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+    <span class="count_top"><i class="fa fa-clock-o"></i> Total Running Time</span>
+    <div class="count">4,567</div>
+    <span class="count_bottom"><i class="red"><i class="fa fa-sort-desc"></i>12% </i> From last Week</span>
+  </div>
+  <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+    <span class="count_top"><i class="fa fa-flash"></i> Total Data</span>
+    <div class="count">63</div>
+    <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>34% </i> From last Week</span>
+  </div>
+  <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+    <span class="count_top"><i class="fa fa-file"></i> Total Files</span>
+    <div class="count">84</div>
+    <span class="count_bottom"><i class="green"><i class="fa fa-sort-asc"></i>34% </i> From last Week</span>
+  </div>
+</div>
 
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Description</th>
-      <th>Slug</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<!-- /top tiles -->
 
-  <tbody>
-    <% @projects.each do |project| %>
-      <tr>
-        <td><%= project.title %></td>
-        <td><%= project.description %></td>
-        <td><%= project.slug %></td>
-        <td><%= link_to 'Show', project %></td>
-        <td><%= link_to 'Edit', edit_project_path(project) %></td>
-        <td><%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<div class="page-title">
+  <div class="title_left">
+    <h3>Project board <small>Select your project that you want to manage</small></h3>
+  </div>
 
-<br>
+  <div class="title_right">
+    <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+      <div class="input-group">
+        <input type="text" class="form-control" placeholder="Search for...">
+        <span class="input-group-btn">
+          <button class="btn btn-default" type="button">Go!</button>
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
 
-<%= link_to 'New Project', new_project_path %>
+<div class="clearfix"></div>
+
+<!-- list of the projects -->
+
+<div class="clearfix"></div>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="x_panel">
+      <div class="x_title">
+        <h2>Project List <small> for Seok Jong Yu </small></h2>
+        <ul class="nav navbar-right panel_toolbox">
+          <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+          </li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+            <ul class="dropdown-menu" role="menu">
+              <li><a href="#">Settings 1</a>
+              </li>
+              <li><a href="#">Settings 2</a>
+              </li>
+            </ul>
+          </li>
+          <li><a class="close-link"><i class="fa fa-close"></i></a>
+          </li>
+        </ul>
+        <div class="clearfix"></div>
+      </div>
+      <div class="x_content">
+
+        <div class="row">
+
+          <p>Project Contents</p>
+          <% @projects.each do |project| %>
+            <div class="col-md-55">
+              <div class="thumbnail">
+                <div class="image view view-first">
+                  <%= link_to  project do %>
+                  <img style="width: 100%; display: block;" src="/images/bio-lab.jpg" alt="<%= project.title %>" />
+                  <% end %>
+                  <div class="mask">
+                    <p><%= project.title %></p>
+                    <div class="tools tools-bottom">
+                      <%= link_to '<i class="fa fa-eye"></i>'.html_safe, project %>
+                      <%= link_to '<i class="fa fa-pencil"></i>'.html_safe, edit_project_path(project) %>
+                      <%= link_to '<i class="fa fa-trash"></i>'.html_safe, project, method: :delete, data: { confirm: 'Are you sure?' } %>
+                    </div>
+                  </div>
+                </div>
+                <div class="caption">
+                  <p><%= project.title %></p>
+                  <p><small><%= project.description %></small></p>
+                </div>
+              </div>
+            </div>
+          <% end %>
+          <!-- for new project -->
+          <div class="col-md-55">
+            <div class="thumbnail">
+              <div class="image view view-first">
+                <%= link_to  new_project_path do %>
+                <img style="width: 100%; display: block;" src="images/add.jpg" alt="Add Project" />
+                <% end %>
+                <div class="mask">
+                  <p>New Project</p>
+                </div>
+              </div>
+              <div class="caption">
+              <%= link_to 'New Project', new_project_path %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

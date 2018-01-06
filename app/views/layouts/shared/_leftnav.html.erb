@@ -26,13 +26,11 @@
       <li><a><i class="fa fa-home"></i> Projects <span class="fa fa-chevron-down"></span></a>
         <ul class="nav child_menu">
           <li><a href="projects">Project Dashboard</a></li>
-          <li><a href="index2.html">My project</a></li>
-          <li><a href="index3.html">Dashboard3</a></li>
         </ul>
       </li>
       <li><a><i class="fa fa-edit"></i>T Cell Epitope Prediction <span class="fa fa-chevron-down"></span></a>
         <ul class="nav child_menu">
-          <li><a href="form.html">Total analysis</a></li>
+          <li><%= link_to 'Total Analysis', totalanalysis_path, class: "nav-link #{yield(:total_analysis_active)}" %></li>
           <li><a href="form_advanced.html">MHC I Binding</a></li>
           <li><a href="form_validation.html">MHC II Binding</a></li>
           <li><a href="form_wizards.html">MHC I processing</a></li>
@@ -41,9 +39,9 @@
       </li>
       <li><a><i class="fa fa-desktop"></i> B Cell Epitope Prediction <span class="fa fa-chevron-down"></span></a>
         <ul class="nav child_menu">
-          <li><a href="general_elements.html">General Elements</a></li>
-          <li><a href="media_gallery.html">Media Gallery</a></li>
-          <li><a href="typography.html">Typography</a></li>
+          <li><a href="general_elements.html">Antigen Sequence Properties</a></li>
+          <li><a href="media_gallery.html">Discotope</a></li>
+          <li><a href="typography.html">ElliPro</a></li>
         </ul>
       </li>
       <li><a><i class="fa fa-table"></i> Tables <span class="fa fa-chevron-down"></span></a>
