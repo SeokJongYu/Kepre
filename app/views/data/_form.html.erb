@@ -1,0 +1,21 @@
+<%= form_for ([@project, @datum]) do |form| %>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name, id: :datum_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :content %>
+    <%= form.text_area :content, id: :datum_content %>
+  </div>
+
+  <div class="field">
+    <%= form.label :data_type %>
+    <%= form.text_field :data_type, id: :datum_type %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
