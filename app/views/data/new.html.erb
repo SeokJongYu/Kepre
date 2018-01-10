@@ -1,5 +1,15 @@
-<h1>New Datum</h1>
+<% provide(:title, 'New Data') %>
+
+<div class="">
+    <div class="page-title">
+        <div class="title_left">
+            <h3>New Data</h3>
+        </div>
+    </div>
+
 
 <%= render 'form', project: @project, datum: @datum %>
 
-<%= link_to 'Back', project_data_path %>
+<%= link_to 'Back', project_path(@project) %>
+
+</div>

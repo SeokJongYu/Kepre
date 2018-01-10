@@ -1,6 +1,15 @@
-<h1>Editing Datum</h1>
+<% provide(:title, 'Edit Data') %>
 
-<%= render 'form', datum: @datum %>
+<div class="">
+    <div class="page-title">
+        <div class="title_left">
+            <h3>Edit Data</h3>
+        </div>
+    </div>
 
-<%= link_to 'Show', @datum %> |
-<%= link_to 'Back', data_path %>
+
+<%= render 'form', project: @project, datum: @datum %>
+
+<%= link_to 'Back', project_path(@project) %>
+
+</div>

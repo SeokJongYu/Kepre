@@ -1,21 +1,53 @@
-<%= form_for ([@project, @datum]) do |form| %>
 
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name, id: :datum_name %>
-  </div>
+        <div class="clearfix"></div>
+        <div class="row">
+          <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+              <div class="x_title">
+                <!-- %= @title % -->
+                <%= @title %>
+                <div class="clearfix"></div>
+              </div>
+              <div class="x_content">
+                <br />
+                  <%= form_with(model: [@project, @datum], class: "form-horizontal form-label-left", id: "demo-form2") do |form| %>
 
-  <div class="field">
-    <%= form.label :content %>
-    <%= form.text_area :content, id: :datum_content %>
-  </div>
+                  <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Name <span class="required">*</span>
+                    </label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                      <%= form.text_field :name, id: :datum_name, class: 'form-control col-md-7 col-xs-12', required: true %>
+                    </div>
+                  </div>
 
-  <div class="field">
-    <%= form.label :data_type %>
-    <%= form.text_field :data_type, id: :datum_type %>
-  </div>
+                  <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Content <span class="required">*</span>
+                    </label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                      <%= form.text_area :content, id: :datum_content , class: 'resizable_textarea form-control', placeholder: 'Add your data' %>
+                    </div>
+                  </div>
 
-  <div class="actions">
-    <%= form.submit %>
-  </div>
-<% end %>
+                  <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Data type <span class="required">*</span>
+                    </label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                      <%= form.text_field :data_type, id: :datum_type, class: 'form-control col-md-7 col-xs-12', required: true %>
+                    </div>
+                  </div>
+
+                  <div class="ln_solid"></div>
+                  <div class="form-group">
+                    <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                      <button class="btn btn-primary" type="button">Cancel</button>
+				              <button class="btn btn-primary" type="reset">Reset</button>
+                      <button type="submit" class="btn btn-success">Submit</button>
+                    </div>
+                  </div>
+
+                <% end %>
+              </div>
+            </div>
+          </div>
+        </div>
+

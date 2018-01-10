@@ -83,8 +83,8 @@
                     <td><%= datum.name %></td>
                     <td><%= datum.content %></td>
                     <td><%= datum.data_type %></td>
-                    <td><%= link_to 'Show', project_datum_path(@project) %></td>
-                    <td><%= link_to 'Edit', edit_project_datum_path(datum) %></td>
+                    <td><%= link_to 'Show', project_datum_path(@project, datum.id) %></td>
+                    <td><%= link_to 'Edit', edit_project_datum_path(@project, datum) %></td>
                     <td></td>
                   </tr>
                 <% end %>
