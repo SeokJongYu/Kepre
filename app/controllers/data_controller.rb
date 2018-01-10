@@ -49,7 +49,7 @@ class DataController < ApplicationController
   def update
     respond_to do |format|
       if @datum.update(datum_params)
-        format.html { redirect_to @datum, notice: 'Datum was successfully updated.' }
+        format.html { redirect_to project_url(@project), notice: 'Datum was successfully updated.' }
         format.json { render :show, status: :ok, location: @datum }
       else
         format.html { render :edit }
