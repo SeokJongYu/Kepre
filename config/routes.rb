@@ -3,6 +3,8 @@ Rails.application.routes.draw do
 
   get 'totalanalysis' => 'static#total_analysis', as: :totalanalysis
 
+  get 'pbs' => 'pbs#jobs'
+
   resources :projects do
     resources :data
   end
