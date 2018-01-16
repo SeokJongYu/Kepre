@@ -38,6 +38,7 @@ gem 'jquery-rails'
 gem 'gentelella-rails'
 gem 'modernizr-rails'
 gem 'pbs'
+gem 'bio', '~> 1.5', '>= 1.5.1'
 
 gem 'friendly_id', '~> 5.1.0' # Note: You MUST use 5.0.0 or greater for Rails 4.0+
 

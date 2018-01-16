@@ -10,17 +10,37 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180115162816) do
+ActiveRecord::Schema.define(version: 20180116072516) do
 
   create_table "analyses", force: :cascade do |t|
     t.string "title"
     t.string "description"
-    t.integer "data_id"
+    t.integer "datum_id"
     t.integer "project_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["data_id"], name: "index_analyses_on_data_id"
+    t.index ["datum_id"], name: "index_analyses_on_datum_id"
     t.index ["project_id"], name: "index_analyses_on_project_id"
+  end
+
+  create_table "bcell_antibody_items", force: :cascade do |t|
+    t.string "name"
+    t.string "swiss"
+    t.integer "datum_id"
+    t.string "prediction_method"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["datum_id"], name: "index_bcell_antibody_items_on_datum_id"
+  end
+
+  create_table "class_immu_items", force: :cascade do |t|
+    t.string "name"
+    t.integer "datum_id"
+    t.string "position_mask"
+    t.string "alleles"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["datum_id"], name: "index_class_immu_items_on_datum_id"
   end
 
   create_table "data", force: :cascade do |t|
@@ -31,6 +51,24 @@ ActiveRecord::Schema.define(version: 20180115162816) do
     t.datetime "updated_at", null: false
     t.integer "project_id"
     t.index ["project_id"], name: "index_data_on_project_id"
+  end
+
+  create_table "disco_tope_items", force: :cascade do |t|
+    t.string "name"
+    t.string "pdb"
+    t.string "chain"
+    t.string "version"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "ellipro_items", force: :cascade do |t|
+    t.string "name"
+    t.string "pdb"
+    t.string "min"
+    t.string "max"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "friendly_id_slugs", force: :cascade do |t|
@@ -47,7 +85,7 @@ ActiveRecord::Schema.define(version: 20180115162816) do
 
   create_table "mhci_items", force: :cascade do |t|
     t.string "name"
-    t.integer "data_id"
+    t.integer "datum_id"
     t.string "prediction_method"
     t.string "species"
     t.string "alleles"
@@ -55,7 +93,20 @@ ActiveRecord::Schema.define(version: 20180115162816) do
     t.string "output_format"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["data_id"], name: "index_mhci_items_on_data_id"
+    t.index ["datum_id"], name: "index_mhci_items_on_datum_id"
+  end
+
+  create_table "mhcii_items", force: :cascade do |t|
+    t.string "name"
+    t.integer "datum_id"
+    t.string "prediction_method"
+    t.string "species"
+    t.string "alleles"
+    t.string "output_sort"
+    t.string "output_format"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["datum_id"], name: "index_mhcii_items_on_datum_id"
   end
 
   create_table "projects", force: :cascade do |t|
@@ -76,12 +127,12 @@ ActiveRecord::Schema.define(version: 20180115162816) do
   end
 
   create_table "tool_items", force: :cascade do |t|
-    t.integer "anlysis_id"
+    t.integer "analysis_id"
     t.string "itemable_type"
     t.integer "itemable_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["anlysis_id"], name: "index_tool_items_on_anlysis_id"
+    t.index ["analysis_id"], name: "index_tool_items_on_analysis_id"
     t.index ["itemable_type", "itemable_id"], name: "index_tool_items_on_itemable_type_and_itemable_id"
   end
 
