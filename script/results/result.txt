@@ -1,6 +1,3 @@
-
-
-<pre style="font-size:12px;padding-right:10px;">
 MHC-I Binding Prediction Results
 -----------
 Method used: recommended
@@ -26438,9 +26435,4 @@ HLA-B*08:01	1	12	20	9	PHIIDEVIN	Consensus (ann/comblib_sidney2008/smm)	100.0	414
 HLA-B*08:01	1	209	217	9	GWTGSDGKT	Consensus (ann/comblib_sidney2008/smm)	100.0	39232.20	98	27324360.09	100	0.24	100	-	-
 HLA-B*08:01	1	403	411	9	THFSDQIEQ	Consensus (ann/comblib_sidney2008/smm)	100.0	41061.05	100	24748563.73	100	0.08	99	-	-
 HLA-B*08:01	1	406	414	9	SDQIEQEAD	Consensus (ann/comblib_sidney2008/smm)	100.0	41935.22	100	13757831.94	100	0.00166	32	-	-
-
-
- 
-</pre>
-
 
