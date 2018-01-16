@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  anlysis: one
+  itemable: one
+  itemable_type: Itemable
+
+two:
+  anlysis: two
+  itemable: two
+  itemable_type: Itemable

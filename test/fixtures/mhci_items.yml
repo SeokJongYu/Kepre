@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  data: one
+  prediction_method: MyString
+  species: MyString
+  alleles: MyString
+  output_sort: MyString
+  output_format: MyString
+
+two:
+  name: MyString
+  data: two
+  prediction_method: MyString
+  species: MyString
+  alleles: MyString
+  output_sort: MyString
+  output_format: MyString

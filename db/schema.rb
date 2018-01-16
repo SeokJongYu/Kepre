@@ -10,7 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180107120130) do
+ActiveRecord::Schema.define(version: 20180115162816) do
+
+  create_table "analyses", force: :cascade do |t|
+    t.string "title"
+    t.string "description"
+    t.integer "data_id"
+    t.integer "project_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["data_id"], name: "index_analyses_on_data_id"
+    t.index ["project_id"], name: "index_analyses_on_project_id"
+  end
 
   create_table "data", force: :cascade do |t|
     t.string "name"
@@ -34,6 +45,19 @@ ActiveRecord::Schema.define(version: 20180107120130) do
     t.index ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type"
   end
 
+  create_table "mhci_items", force: :cascade do |t|
+    t.string "name"
+    t.integer "data_id"
+    t.string "prediction_method"
+    t.string "species"
+    t.string "alleles"
+    t.string "output_sort"
+    t.string "output_format"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["data_id"], name: "index_mhci_items_on_data_id"
+  end
+
   create_table "projects", force: :cascade do |t|
     t.string "title"
     t.text "description"
@@ -41,6 +65,24 @@ ActiveRecord::Schema.define(version: 20180107120130) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["slug"], name: "index_projects_on_slug", unique: true
+  end
+
+  create_table "results", force: :cascade do |t|
+    t.text "output"
+    t.integer "analysis_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["analysis_id"], name: "index_results_on_analysis_id"
+  end
+
+  create_table "tool_items", force: :cascade do |t|
+    t.integer "anlysis_id"
+    t.string "itemable_type"
+    t.integer "itemable_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["anlysis_id"], name: "index_tool_items_on_anlysis_id"
+    t.index ["itemable_type", "itemable_id"], name: "index_tool_items_on_itemable_type_and_itemable_id"
   end
 
 end
