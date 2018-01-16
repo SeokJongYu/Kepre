@@ -1,6 +1,6 @@
-class CreateMhciItems < ActiveRecord::Migration[5.1]
+class CreateMhciiItems < ActiveRecord::Migration[5.1]
   def change
-    create_table :mhci_items do |t|
+    create_table :mhcii_items do |t|
       t.string :name
       t.references :datum, foreign_key: true
       t.string :prediction_method
