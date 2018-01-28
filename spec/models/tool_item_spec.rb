@@ -33,9 +33,8 @@ RSpec.describe ToolItem do
         subject.itemable = mhci
 
         expect(subject).to be_valid
-        expect(subject.itemable.datum)== d
-        
+        expect(subject.itemable).to be(mhci)
+        expect(subject.analysis).to be(analysis)
     end
-
 
 end

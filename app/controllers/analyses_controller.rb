@@ -1,5 +1,7 @@
 class AnalysesController < ApplicationController
   before_action :set_analysis, only: [:show, :edit, :update, :destroy]
+  before_action :set_project, only: [:new, :create]
+  before_action :set_datum, only: [:new, :create]
 
   # GET /analyses
   # GET /analyses.json
@@ -14,7 +16,12 @@ class AnalysesController < ApplicationController
 
   # GET /analyses/new
   def new
+
     @analysis = Analysis.new
+    @analysis.datum = @datum
+    @analysis.project = @project
+    # @analysis.build_tool_item
+    
   end
 
   # GET /analyses/1/edit
@@ -27,8 +34,13 @@ class AnalysesController < ApplicationController
     @analysis = Analysis.new(analysis_params)
 
     respond_to do |format|
-      if @analysis.save
-        format.html { redirect_to @analysis, notice: 'Analysis was successfully created.' }
+      if @analysis.check
+        session[:project_id]=@project.id
+        session[:datum_id]=@datum.id
+        session[:analysis_title]=@analysis.title
+        session[:analysis_description]=@analysis.description
+        session[:analysis_toolitem] = params[:analysis][:tool_item]
+        format.html { redirect_to analysis_steps_path, notice: 'Analysis was successfully created.' }
         format.json { render :show, status: :created, location: @analysis }
       else
         format.html { render :new }
@@ -69,6 +81,15 @@ class AnalysesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def analysis_params
-      params.fetch(:analysis, {})
+      #params.fetch(:analysis, {})
+      params.require(:analysis).permit(:title, :description)
+    end
+
+    # Use callbacks to share common setup or constraints between actions.
+    def set_project
+      @project = Project.friendly.find(params[:project_id])
+    end
+    def set_datum
+      @datum = Datum.find(params[:datum_id])
     end
 end

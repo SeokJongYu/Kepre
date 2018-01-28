@@ -1,0 +1,30 @@
+
+<% provide(:title, 'New Analysis') %>
+
+<div class="">
+    <div class="page-title">
+        <div class="title_left">
+            <h3>Tool Option</h3>
+        </div>
+    </div>
+
+    <div class="clearfix"></div>
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="x_panel">
+                <div class="x_title">
+                <!-- %= @title % -->
+                <%= @tool_item.getType %>
+                <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                <br />
+                <% if @tool_item.getType == 'MHC-I'%>
+                    <%= render 'mhci'  %>
+                <% end %>
+                 
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
