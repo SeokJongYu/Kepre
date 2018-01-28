@@ -5,5 +5,11 @@ class Analysis < ApplicationRecord
   has_many :result
 
   validates :title, presence: true
-  
+  validates :description, presence: true
+  accepts_nested_attributes_for :tool_item, allow_destroy: true
+
+
+  def check
+    (title != nil and description != nil) ? true : false
+  end
 end

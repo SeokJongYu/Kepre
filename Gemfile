@@ -39,6 +39,7 @@ gem 'gentelella-rails'
 gem 'modernizr-rails'
 gem 'pbs'
 gem 'bio', '~> 1.5', '>= 1.5.1'
+gem 'wicked'
 
 gem 'friendly_id', '~> 5.1.0' # Note: You MUST use 5.0.0 or greater for Rails 4.0+
 
@@ -49,6 +50,8 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   # Adds support for Capybara system testing and selenium driver
+  gem 'rails-controller-testing'
+  gem 'factory_bot_rails'
   gem 'capybara', '~> 2.13'
   gem 'selenium-webdriver'
   gem 'database_cleaner'
