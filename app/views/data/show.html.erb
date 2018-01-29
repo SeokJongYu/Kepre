@@ -66,16 +66,19 @@
                                   <th>#</th>
                                   <th>Name</th>
                                   <th>Description</th>
+                                  <th>Tool</th>
                                   <th></th>
                                 </tr>
                               </thead>
                               <tbody>
-                              <% if @analysis != nil %>
+                              <% if @analyses != nil %>
                                 <% @analyses.each do |analysis| %>
                                 <tr>
+                                  <% @tool_content = analysis.tool_item.getToolType %>
                                   <td><%= analysis.id %></td>
                                   <td><%= analysis.title %></td>
                                   <td><%= analysis.description %></td>
+                                  <td><%= @tool_content %></td>
                                   <td><!-- %= link_to 'Show', project_datum_path(@project, datum.id) % -->
                                   <!-- %= link_to 'Edit', edit_project_datum_path(@project, datum) % --></td>
                                 </tr>
