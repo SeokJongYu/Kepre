@@ -67,7 +67,7 @@
                                   <th>Name</th>
                                   <th>Description</th>
                                   <th>Tool</th>
-                                  <th></th>
+                                  <th>Status</th>
                                 </tr>
                               </thead>
                               <tbody>
@@ -79,7 +79,7 @@
                                   <td><%= analysis.title %></td>
                                   <td><%= analysis.description %></td>
                                   <td><%= @tool_content %></td>
-                                  <td><!-- %= link_to 'Show', project_datum_path(@project, datum.id) % -->
+                                  <td> <button type="button" class="btn btn-success">Analyzing... </button> <!-- %= link_to 'Show', project_datum_path(@project, datum.id) % -->
                                   <!-- %= link_to 'Edit', edit_project_datum_path(@project, datum) % --></td>
                                 </tr>
                                 <%end%>
