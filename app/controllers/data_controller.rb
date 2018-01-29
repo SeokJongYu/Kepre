@@ -17,6 +17,7 @@ class DataController < ApplicationController
   # GET /data/1
   # GET /data/1.json
   def show
+    @analyses = Analysis.where( datum_id: @datum.id)
   end
 
   # GET /data/new
