@@ -20,7 +20,7 @@
                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Prediction Method <span class="required">*</span>
                     </label>
                     <div class="col-md-6 col-sm-6 col-xs-12">
-                        <%= form.select :prediction_method, ['IEDB recommended', 'Consensus','netMHCpan','ANN', 'SMMPMBEC', 'SMM','CombLib_Sidney2008','PickPocket','netMHCcons','netMHCstabpan'], :prompt => 'Select tool' %>
+                        <%= form.select :prediction_method, ['IEDB_recommended', 'Consensus','netMHCpan','ANN', 'SMMPMBEC', 'SMM','CombLib_Sidney2008','PickPocket','netMHCcons','netMHCstabpan'], :prompt => 'Select tool' %>
                     </div>
                 </div>
 
@@ -37,6 +37,13 @@
                     </label>
                     <div class="col-md-6 col-sm-6 col-xs-12">
                       <%= form.text_field :alleles, id: :alleles,  class: 'form-control col-md-7 col-xs-12', required: true %>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">length <span class="required">*</span>
+                    </label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                      <%= form.text_field :length, id: :length,  class: 'form-control col-md-7 col-xs-12', required: true %>
                     </div>
                 </div>
 

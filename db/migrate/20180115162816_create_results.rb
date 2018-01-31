@@ -1,7 +1,8 @@
 class CreateResults < ActiveRecord::Migration[5.1]
   def change
     create_table :results do |t|
-      t.text :output
+      t.string :location
+      t.binary :output
       t.references :analysis, foreign_key: true
 
       t.timestamps

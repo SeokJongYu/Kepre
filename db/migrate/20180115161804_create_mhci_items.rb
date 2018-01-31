@@ -6,6 +6,7 @@ class CreateMhciItems < ActiveRecord::Migration[5.1]
       t.string :prediction_method
       t.string :species
       t.string :alleles
+      t.integer :length
       t.string :output_sort
       t.string :output_format
 
