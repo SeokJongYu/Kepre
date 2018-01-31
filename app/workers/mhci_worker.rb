@@ -17,6 +17,8 @@ class MhciWorker
     # monitoring analysis job and do post processing
     #TODO poll_job(analysis)
 
+    #TODO post_processing(analysis)
+    
   end
 
   def create_data(analysis)
@@ -68,6 +70,15 @@ class MhciWorker
   end
 
   def poll_job(analysis)
-    
+    job_id = analysis.job_id
+    status = analysis.status
+    until status == "done"  do
+      @stat = @b.get_job(job_id)
+      if (@stat != status) then
+        analysis.status = @stat
+        analysis.save
+        sleep 10
+      end
+   end
   end
 end
