@@ -13,7 +13,7 @@ class MhciWorker
     # make run.sh script
     create_script(analysis)
     # create torque controller and lanch
-    #TODO lanch_torque_job(analysis)
+    lanch_torque_job(analysis)
     # monitoring analysis job and do post processing
     #TODO poll_job(analysis)
 
@@ -54,14 +54,15 @@ class MhciWorker
 
 
   def lanch_torque_job(analysis)
-    @b = PBS::Batch.new(
-      host: 'manjaro-codegen',
-      lib: '/usr/lib',
-      bin: '/usr/bin'
-      )
-    @job_id = @b.submit_script(@script_file)
+    # @b = PBS::Batch.new(
+    #   host: 'manjaro-codegen',
+    #   lib: '/usr/lib',
+    #   bin: '/usr/bin'
+    #   )
+    # @job_id = @b.submit_script(@script_file)
 
-    analysis.job_id = @job_id
+    # analysis.job_id = @job_id
+    analysis.job_id = "1"
     analysis.status = "submit"
     analysis.save
   end
