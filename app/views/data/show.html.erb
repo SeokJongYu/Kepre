@@ -74,12 +74,14 @@
                               <% if @analyses != nil %>
                                 <% @analyses.each do |analysis| %>
                                 <tr>
-                                  <% @tool_content = analysis.tool_item.getToolType %>
+                                  <% @tool_content = analysis.tool_item.itemable.getType %>
                                   <td><%= analysis.id %></td>
                                   <td><%= analysis.title %></td>
                                   <td><%= analysis.description %></td>
                                   <td><%= @tool_content %></td>
-                                  <td> <button type="button" class="btn btn-success">Analyzing... </button> <!-- %= link_to 'Show', project_datum_path(@project, datum.id) % -->
+                                  <td> 
+                                  <button type="button" class="btn btn-info btn-sm"> <span class="glyphicon glyphicon-cog"></span> <%= analysis.status %> </button> 
+                                  <!-- %= link_to 'Show', project_datum_path(@project, datum.id) % -->
                                   <!-- %= link_to 'Edit', edit_project_datum_path(@project, datum) % --></td>
                                 </tr>
                                 <%end%>
