@@ -10,19 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180123153258) do
+ActiveRecord::Schema.define(version: 20180116072516) do
 
   create_table "analyses", force: :cascade do |t|
     t.string "title"
     t.string "description"
+    t.string "job_id"
+    t.string "status"
     t.integer "datum_id"
     t.integer "project_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "tool_item_id"
     t.index ["datum_id"], name: "index_analyses_on_datum_id"
     t.index ["project_id"], name: "index_analyses_on_project_id"
-    t.index ["tool_item_id"], name: "index_analyses_on_tool_item_id"
   end
 
   create_table "bcell_antibody_items", force: :cascade do |t|
@@ -40,6 +40,7 @@ ActiveRecord::Schema.define(version: 20180123153258) do
     t.integer "datum_id"
     t.string "position_mask"
     t.string "alleles"
+    t.string "custom_val"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["datum_id"], name: "index_class_immu_items_on_datum_id"
@@ -91,6 +92,7 @@ ActiveRecord::Schema.define(version: 20180123153258) do
     t.string "prediction_method"
     t.string "species"
     t.string "alleles"
+    t.integer "length"
     t.string "output_sort"
     t.string "output_format"
     t.datetime "created_at", null: false
@@ -104,6 +106,7 @@ ActiveRecord::Schema.define(version: 20180123153258) do
     t.string "prediction_method"
     t.string "species"
     t.string "alleles"
+    t.integer "length"
     t.string "output_sort"
     t.string "output_format"
     t.datetime "created_at", null: false
@@ -121,7 +124,8 @@ ActiveRecord::Schema.define(version: 20180123153258) do
   end
 
   create_table "results", force: :cascade do |t|
-    t.text "output"
+    t.string "location"
+    t.binary "output"
     t.integer "analysis_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

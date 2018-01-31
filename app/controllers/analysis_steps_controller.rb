@@ -37,16 +37,21 @@ class AnalysisStepsController < ApplicationController
         analysis.description = @desc
         analysis.datum = @datum
         analysis.project = @project
-        analysis.tool_item = tool
+        
         analysis.save
 
         # create tool_item and tool instance
         tool.analysis = analysis
         tool.save
+        analysis.update(tool_item:  tool)
+
         @tool_item.save
 
         # @user = current_user
         # @user.update_attributes(params[:user])
+
+        MhciAnalyserJob.perform_later analysis.id
+
         render_wizard @tool_item
     end
 
@@ -74,6 +79,6 @@ private
     end
 
     def mhci_params
-        params.require(:mhci_item).permit(:name, :prediction_method, :species, :alleles, :output_sort)
+        params.require(:mhci_item).permit(:name, :prediction_method, :species, :alleles, :length, :output_sort)
     end
 end
