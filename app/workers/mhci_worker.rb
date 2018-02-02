@@ -1,5 +1,6 @@
 class MhciWorker
   require 'fileutils'
+  require 'csv'
 
   def exec(analysis_id)
     #if you want get array arguments, just use *args
@@ -16,9 +17,9 @@ class MhciWorker
     lanch_torque_job(analysis)
     # monitoring analysis job and do post processing
     #TODO poll_job(analysis)
+    sleep 120
+    post_processing(analysis)
 
-    #TODO post_processing(analysis)
-    
   end
 
   def create_data(analysis)
@@ -37,6 +38,8 @@ class MhciWorker
     mhci_option = MhciItem.find(tool_item.itemable_id)
     
     @script_file = @dir_str + '/run.sh'
+    @output_file = @dir_str + '/output.txt'
+
     begin
       script = File.open(@script_file, "w")
       script.write("#!/bin/sh\n")
@@ -79,6 +82,26 @@ class MhciWorker
         analysis.save
         sleep 10
       end
-   end
+    end
   end
+
+  def post_processing(analysis)
+    # create Result
+    result = Result.new()
+    result.location = @output_file
+    result.analysis = analysis
+    result.save
+
+    csv_text = File.read(@output_file)
+    csv = CSV.parse(csv_text, :col_sep =>"\t", :headers => true, :converters => lambda { |s| s.tr("-","") })
+    csv.each do |row|
+      puts row.to_hash
+      mhc_result = MhciResult.create(row.to_hash)
+      mhc_result.result = result
+      mhc_result.save
+    
+    end
+    
+  end
+
 end
