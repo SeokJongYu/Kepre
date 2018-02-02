@@ -81,6 +81,8 @@
                                   <td><%= @tool_content %></td>
                                   <td> 
                                   <button type="button" class="btn btn-info btn-sm"> <span class="glyphicon glyphicon-cog"></span> <%= analysis.status %> </button> 
+                                  <% result = analysis.result %>
+                                  <%= link_to '<i class="fa fa-wrench"></i> Result'.html_safe, result_show_path(:tool_type => @tool_content, :result_id => result.id, :analysis_id => analysis.id ), :class=>"btn btn-primary" %>
                                   <!-- %= link_to 'Show', project_datum_path(@project, datum.id) % -->
                                   <!-- %= link_to 'Edit', edit_project_datum_path(@project, datum) % --></td>
                                 </tr>
