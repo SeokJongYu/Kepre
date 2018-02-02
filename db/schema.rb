@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180116072516) do
+ActiveRecord::Schema.define(version: 20180202023330) do
 
   create_table "analyses", force: :cascade do |t|
     t.string "title"
@@ -98,6 +98,29 @@ ActiveRecord::Schema.define(version: 20180116072516) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["datum_id"], name: "index_mhci_items_on_datum_id"
+  end
+
+  create_table "mhci_results", force: :cascade do |t|
+    t.string "allele"
+    t.integer "seq_num"
+    t.integer "start"
+    t.integer "end"
+    t.integer "length"
+    t.string "peptide"
+    t.string "method"
+    t.decimal "percentile_rank", precision: 3, scale: 5
+    t.decimal "ann_ic50", precision: 3, scale: 5
+    t.decimal "ann_rank", precision: 3, scale: 5
+    t.decimal "smm_ic50", precision: 3, scale: 5
+    t.decimal "smm_rank", precision: 3, scale: 5
+    t.decimal "comblib_sidney2008_score", precision: 3, scale: 5
+    t.decimal "comblib_sidney2008_rank", precision: 3, scale: 5
+    t.decimal "netmhcpan_ic50", precision: 3, scale: 5
+    t.decimal "netmhcpan_rank", precision: 3, scale: 5
+    t.integer "result_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["result_id"], name: "index_mhci_results_on_result_id"
   end
 
   create_table "mhcii_items", force: :cascade do |t|
