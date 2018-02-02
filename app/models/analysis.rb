@@ -3,7 +3,7 @@ class Analysis < ApplicationRecord
   belongs_to :project
   has_one :tool_item
   has_one :itemable, through: :tool_item, source_type: "Itemable"
-  has_many :result
+  has_one :result
 
   validates :title, presence: true
   validates :description, presence: true

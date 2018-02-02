@@ -1,6 +1,13 @@
 Rails.application.routes.draw do
 
 
+  get 'result/show'
+
+  get 'result/plot'
+
+  get 'mhci_result/show'
+  get 'mhci_result/plot'
+
   get 'totalanalysis' => 'static#total_analysis', as: :totalanalysis
 
   get 'pbs' => 'pbs#jobs'
