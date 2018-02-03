@@ -8,4 +8,5 @@ jQuery ->
     xkey: 'id'
     ykeys: ['percentile_rank','ann_rank','smm_rank']
     labels: ['percentile_rank','ann_rank','smm_rank']
-    resize: true
+    parseTime: false
+    xLabelMargin: 10
