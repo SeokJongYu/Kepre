@@ -5,5 +5,7 @@ class MhciResultController < ApplicationController
   end
 
   def plot
+    @results = MhciResult.where("result_id = ?", params[:result_id])
+    @analysis = Analysis.find(params[:analysis_id])
   end
 end
