@@ -16,8 +16,7 @@ class MhciWorker
     # create torque controller and lanch
     lanch_torque_job(analysis)
     # monitoring analysis job and do post processing
-    #TODO poll_job(analysis)
-    sleep 120
+    poll_job(analysis)
     post_processing(analysis)
 
   end
@@ -59,15 +58,14 @@ class MhciWorker
 
 
   def lanch_torque_job(analysis)
-    # @b = PBS::Batch.new(
-    #   host: 'manjaro-codegen',
-    #   lib: '/usr/lib',
-    #   bin: '/usr/bin'
-    #   )
-    # @job_id = @b.submit_script(@script_file)
+    @b = PBS::Batch.new(
+      host: 'manjaro-codegen',
+      lib: '/usr/lib',
+      bin: '/usr/bin'
+      )
+    @job_id = @b.submit_script(@script_file)
 
-    # analysis.job_id = @job_id
-    analysis.job_id = "1"
+    analysis.job_id = @job_id
     analysis.status = "submit"
     analysis.save
   end
@@ -75,13 +73,29 @@ class MhciWorker
   def poll_job(analysis)
     job_id = analysis.job_id
     status = analysis.status
-    until status == "done"  do
+    stat_server = "submit"
+    until stat_server == "Done"  do
       @stat = @b.get_job(job_id)
-      if (@stat != status) then
-        analysis.status = @stat
+      puts @stat.to_yaml
+      puts ">>>>>"
+      puts job_id
+      @stat.each_key {|key| puts key }
+      val = @stat[job_id]
+      stat_str = val[:job_state]
+      if stat_str == "Q" 
+        stat_server = "Queue"
+      elsif stat_str == "R"
+        stat_server = "Running"
+      elsif stat_str == "C"
+        stat_server = "Done"
+      end
+
+      if stat_server != status
+        analysis.status = stat_server
         analysis.save
         sleep 10
       end
+      
     end
   end
 
