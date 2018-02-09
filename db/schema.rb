@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180202023330) do
+ActiveRecord::Schema.define(version: 20180209123005) do
 
   create_table "analyses", force: :cascade do |t|
     t.string "title"
@@ -84,6 +84,24 @@ ActiveRecord::Schema.define(version: 20180202023330) do
     t.index ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type"
     t.index ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id"
     t.index ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type"
+  end
+
+  create_table "kbio_mhci_items", force: :cascade do |t|
+    t.string "name"
+    t.integer "datum_id"
+    t.integer "percentile_rank"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["datum_id"], name: "index_kbio_mhci_items_on_datum_id"
+  end
+
+  create_table "kbio_mhcii_items", force: :cascade do |t|
+    t.string "name"
+    t.integer "datum_id"
+    t.integer "percentile_rank"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["datum_id"], name: "index_kbio_mhcii_items_on_datum_id"
   end
 
   create_table "mhci_items", force: :cascade do |t|
