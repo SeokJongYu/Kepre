@@ -23,8 +23,8 @@ class AnalysisStepsController < ApplicationController
         tool = ToolItem.new
 
         # save input option to tool_item
-        @tool_item = ToolFactory.build(@tool_item_cont, mhci_params)
-        if (@tool_item.getType == "MHC-I")
+        @tool_item = ToolFactory.build(@tool_item_cont, get_params)
+        if (@tool_item.getType == "MHC-I" || @tool_item.getType == "MHC-II" || @tool_item.getType == "KBIO-MHC-I" || @tool_item.getType == "KBIO-MHC-II" )
             @tool_item.datum = @datum
         end
 
@@ -49,8 +49,16 @@ class AnalysisStepsController < ApplicationController
 
         # @user = current_user
         # @user.update_attributes(params[:user])
-
-        MhciAnalyserJob.perform_later analysis.id
+        case @tool_item_cont
+        when "MHC I"
+            MhciAnalyserJob.perform_later analysis.id
+        when "MHC II"
+            #MhciiAnalyserJob.perform_later analysis.id
+        when "KBIO MHC I"
+            KbioMhciAnalyserJob.perform_later analysis.id
+        when "KBIO MHC II"
+            KbioMhciiAnalyserJob.perform_later analysis.id
+        end
 
         render_wizard @tool_item
     end
@@ -80,5 +88,19 @@ private
 
     def mhci_params
         params.require(:mhci_item).permit(:name, :prediction_method, :species, :alleles, :length, :output_sort)
+    end
+
+    def get_params
+
+        case @tool_item_cont
+        when "MHC I"
+            params.require(:mhci_item).permit(:name, :prediction_method, :species, :alleles, :length, :output_sort)
+        when "MHC II"
+            params.require(:mhcii_item).permit(:name, :prediction_method, :species, :alleles, :length, :output_sort)
+        when "KBIO MHC I"
+            params.require(:kbio_mhci_item).permit(:name, :percentile_rank)
+        when "KBIO MHC II"
+            params.require(:kbio_mhcii_item).permit(:name, :percentile_rank)
+        end
     end
 end

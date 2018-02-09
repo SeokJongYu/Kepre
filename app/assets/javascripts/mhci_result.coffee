@@ -10,3 +10,7 @@ jQuery ->
     labels: ['percentile_rank','ann_rank','smm_rank']
     parseTime: false
     xLabelMargin: 10
+    hoverCallback: (index, options) ->
+      row = options.data[index]
+      row.peptide
+    
