@@ -40,6 +40,7 @@ class KbioMhciWorker
     @output_file = @dir_str + '/output.txt'
     @processing_file = @dir_str + '/raw_data.txt'
     @avg_immune_file = @dir_str + '/avg_immune_score.txt'
+    @cluster_file = @dir_str + '/kbio_mhci_view.json'
     @percentile_rank = mhci_option.getPercentileRank
     begin
       script = File.open(@script_file, "w")
@@ -55,6 +56,9 @@ class KbioMhciWorker
       script.write("perl /usr/local/IEDB/KBIO/mk_mhc_i_pred_mat.pl -fasta #{@file_str} -HLA_file /usr/local/IEDB/KBIO/allele27.list -curl_out #{@output_file} -percentile_rank #{@percentile_rank} > #{@processing_file} 2> err2.txt\n")
 
       script.write("perl /usr/local/IEDB/KBIO/avg_immune.pl #{@processing_file} > #{@avg_immune_file}\n")
+
+      script.write("perl /usr/local/IEDB/KBIO/create_matrix.pl #{@processing_file} > mat.txt\n")
+      script.write("python /usr/local/IEDB/KBIO/create_clustergrammer.py \n")
 
     rescue IOError => e 
     ensure
@@ -106,9 +110,13 @@ class KbioMhciWorker
   end
 
   def post_processing(analysis)
+    analysis.status = "Post processing"
+    analysis.save
+    
     # create Result
     result = Result.new()
     result.location = @output_file
+    result.output = @cluster_file
     result.analysis = analysis
     result.save
     puts "post processing"
@@ -137,6 +145,9 @@ class KbioMhciWorker
       kbio_mhc_result.save
     
     end
+
+    analysis.status = "Finish"
+    analysis.save
     
   end
 
