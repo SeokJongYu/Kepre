@@ -1,8 +1,10 @@
 Rails.application.routes.draw do
 
 
-  get 'result/show'
+  get 'kbio_mhci_result/show'
+  get 'kbio_mhci_result/plot'
 
+  get 'result/show'
   get 'result/plot'
 
   get 'mhci_result/show'
