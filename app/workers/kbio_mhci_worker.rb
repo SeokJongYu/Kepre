@@ -115,10 +115,22 @@ class KbioMhciWorker
     csv_text = File.read(@output_file)
     csv = CSV.parse(csv_text, :col_sep =>"\t", :headers => true, :converters => lambda { |s| s.tr("-","") })
     csv.each do |row|
+      if row.percentile_rank < @percentile_rank
+        puts row.to_hash
+        mhc_result = MhciResult.create(row.to_hash)
+        mhc_result.result = result
+        mhc_result.save
+      end
+    
+    end
+
+    csv_text = File.read(@processing_file)
+    csv_prog = CSV.parse(csv_text, :col_sep =>" ", :headers => true, :converters => lambda { |s| s.tr("-","") })
+    csv_prog.each do |row|
       puts row.to_hash
-      # mhc_result = MhciResult.create(row.to_hash)
-      # mhc_result.result = result
-      # mhc_result.save
+      kbio_mhc_result = KbioMhciResult.create(row.to_hash)
+      kbio_mhc_result.result = result
+      kbio_mhc_result.save
     
     end
     
