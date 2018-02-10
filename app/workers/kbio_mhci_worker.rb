@@ -46,7 +46,7 @@ class KbioMhciWorker
       script.write("#!/bin/sh\n")
       script.write("\n")
       script.write("#PBS -N Kepre-KBIO-MHC_I\n")
-      script.write("#PBS -l nodes=1,walltime=00:01:00\n")
+      script.write("#PBS -l nodes=1,walltime=00:20:00\n")
       script.write("#PBS -q batch\n")
       script.write("\n")
       script.write("cd #{@dir_str} \n")
@@ -82,9 +82,9 @@ class KbioMhciWorker
     stat_server = "submit"
     until stat_server == "Done"  do
       @stat = @b.get_job(job_id)
-      puts @stat.to_yaml
+      #puts @stat.to_yaml
       puts ">>>>>"
-      puts job_id
+      #puts job_id
       @stat.each_key {|key| puts key }
       val = @stat[job_id]
       stat_str = val[:job_state]
@@ -111,12 +111,16 @@ class KbioMhciWorker
     result.location = @output_file
     result.analysis = analysis
     result.save
+    puts "post processing"
+    puts @output_file
+    puts @processing_file
+    puts @percentile_rank
 
     csv_text = File.read(@output_file)
     csv = CSV.parse(csv_text, :col_sep =>"\t", :headers => true, :converters => lambda { |s| s.tr("-","") })
     csv.each do |row|
-      if row.percentile_rank < @percentile_rank
-        puts row.to_hash
+      if row['percentile_rank'].to_f < @percentile_rank.to_f
+        #puts row.to_hash
         mhc_result = MhciResult.create(row.to_hash)
         mhc_result.result = result
         mhc_result.save
@@ -124,11 +128,11 @@ class KbioMhciWorker
     
     end
 
-    csv_text = File.read(@processing_file)
-    csv_prog = CSV.parse(csv_text, :col_sep =>" ", :headers => true, :converters => lambda { |s| s.tr("-","") })
-    csv_prog.each do |row|
-      puts row.to_hash
-      kbio_mhc_result = KbioMhciResult.create(row.to_hash)
+    csv_text2 = File.read(@processing_file)
+    csv_prog = CSV.parse(csv_text2, :col_sep =>" ", :headers => true)
+    csv_prog.each do |row2|
+      #puts row2.to_hash
+      kbio_mhc_result = KbioMhciResult.create(row2.to_hash)
       kbio_mhc_result.result = result
       kbio_mhc_result.save
     

@@ -4,7 +4,7 @@ class CreateKbioMhciResults < ActiveRecord::Migration[5.1]
       t.integer :seq_id
       t.string :aa
       t.string :allele
-      t.decimal :score, :precision => 3, :scale => 5
+      t.decimal :score, :precision => 10, :scale => 5
       t.references :result, foreign_key: true
 
       t.timestamps

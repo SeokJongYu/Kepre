@@ -99,7 +99,7 @@ ActiveRecord::Schema.define(version: 20180210075417) do
     t.integer "seq_id"
     t.string "aa"
     t.string "allele"
-    t.decimal "score", precision: 3, scale: 5
+    t.decimal "score", precision: 10, scale: 5
     t.integer "result_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -137,15 +137,15 @@ ActiveRecord::Schema.define(version: 20180210075417) do
     t.integer "length"
     t.string "peptide"
     t.string "method"
-    t.decimal "percentile_rank", precision: 3, scale: 5
-    t.decimal "ann_ic50", precision: 3, scale: 5
-    t.decimal "ann_rank", precision: 3, scale: 5
-    t.decimal "smm_ic50", precision: 3, scale: 5
-    t.decimal "smm_rank", precision: 3, scale: 5
-    t.decimal "comblib_sidney2008_score", precision: 3, scale: 5
-    t.decimal "comblib_sidney2008_rank", precision: 3, scale: 5
-    t.decimal "netmhcpan_ic50", precision: 3, scale: 5
-    t.decimal "netmhcpan_rank", precision: 3, scale: 5
+    t.decimal "percentile_rank", precision: 10, scale: 5
+    t.decimal "ann_ic50", precision: 10, scale: 5
+    t.decimal "ann_rank", precision: 10, scale: 5
+    t.decimal "smm_ic50", precision: 10, scale: 5
+    t.decimal "smm_rank", precision: 10, scale: 5
+    t.decimal "comblib_sidney2008_score", precision: 10, scale: 5
+    t.decimal "comblib_sidney2008_rank", precision: 10, scale: 5
+    t.decimal "netmhcpan_ic50", precision: 10, scale: 5
+    t.decimal "netmhcpan_rank", precision: 10, scale: 5
     t.integer "result_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
