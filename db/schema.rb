@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180209123005) do
+ActiveRecord::Schema.define(version: 20180210075417) do
 
   create_table "analyses", force: :cascade do |t|
     t.string "title"
@@ -93,6 +93,17 @@ ActiveRecord::Schema.define(version: 20180209123005) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["datum_id"], name: "index_kbio_mhci_items_on_datum_id"
+  end
+
+  create_table "kbio_mhci_results", force: :cascade do |t|
+    t.integer "seq_id"
+    t.string "aa"
+    t.string "allele"
+    t.decimal "score", precision: 3, scale: 5
+    t.integer "result_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["result_id"], name: "index_kbio_mhci_results_on_result_id"
   end
 
   create_table "kbio_mhcii_items", force: :cascade do |t|
