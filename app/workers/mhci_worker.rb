@@ -100,6 +100,10 @@ class MhciWorker
   end
 
   def post_processing(analysis)
+
+    analysis.status = "Post processing"
+    analysis.save
+
     # create Result
     result = Result.new()
     result.location = @output_file
@@ -115,6 +119,9 @@ class MhciWorker
       mhc_result.save
     
     end
+    
+    analysis.status = "Finish"
+    analysis.save
     
   end
 

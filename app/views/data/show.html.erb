@@ -82,7 +82,7 @@
                                   <td> 
                                   <button type="button" class="btn btn-info btn-sm"> <span class="glyphicon glyphicon-cog"></span> <%= analysis.status %> </button> 
                                   <% result = analysis.result %>
-                                  <% if analysis.status == "Done" %>
+                                  <% if analysis.status == "Finish" %>
                                   <%= link_to '<i class="fa fa-wrench"></i> Result Table'.html_safe, result_show_path(:tool_type => @tool_content, :result_id => result.id, :analysis_id => analysis.id ), :class=>"btn btn-primary" %>
                                   <%= link_to '<i class="fa fa-wrench"></i> Plot'.html_safe, result_plot_path(:tool_type => @tool_content, :result_id => result.id, :analysis_id => analysis.id ), :class=>"btn btn-primary" %>
                                   <% end %>
