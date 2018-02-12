@@ -48,6 +48,8 @@ class KbioMhciWorker
       script.write("\n")
       script.write("#PBS -N Kepre-KBIO-MHC_I\n")
       script.write("#PBS -l nodes=1,walltime=00:20:00\n")
+      script.write("#PBS -e #{@dir_str}/job_error.out\n")
+      script.write("#PBS -o #{@dir_str}/job_output.out\n")
       script.write("#PBS -q batch\n")
       script.write("\n")
       script.write("cd #{@dir_str} \n")
