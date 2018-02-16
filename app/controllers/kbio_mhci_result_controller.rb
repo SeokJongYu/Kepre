@@ -5,7 +5,7 @@ class KbioMhciResultController < ApplicationController
   end
 
   def plot
-    @results = Result.where("result_id = ?", params[:result_id])
+    @results = Result.find_by_id(params[:result_id])
     @json = read_file(@results.output)
     @analysis = Analysis.find(params[:analysis_id])
   end
