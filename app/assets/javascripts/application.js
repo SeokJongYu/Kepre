@@ -14,5 +14,7 @@
 //= require turbolinks
 //= require gentelella
 //= require gentelella-custom
+//= require d3
+//= require underscore
 //= require clustergrammer
 //= require_tree .
