@@ -8,12 +8,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <%= stylesheet_link_tag 'application', media: 'all' %>
-
+    <%= tag :meta, name: :psj, action: action_name, controller: controller_name %>
     <title><%= yield :title %> | Kepre</title>
 
   </head>
 
-  <body class="nav-md">
+  <%= content_tag :body, class: "nav-md", data: { action: action_name, controller: controller_name } do %>
+  <!--body class="nav-md" -->
     <div class="container body">
       <div class="main_container">
         <div class="col-md-3 left_col">
@@ -45,6 +46,8 @@
         <!-- /footer content -->
       </div>
     </div>
-    <%= javascript_include_tag 'application' %>
-  </body>
+
+  <% end %>
+  <%= javascript_include_tag 'application' %>
+  <!-- /body -->
 </html>
