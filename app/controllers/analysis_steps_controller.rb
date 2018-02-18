@@ -53,7 +53,7 @@ class AnalysisStepsController < ApplicationController
         when "MHC I"
             MhciAnalyserJob.perform_later analysis.id
         when "MHC II"
-            #MhciiAnalyserJob.perform_later analysis.id
+            MhciiAnalyserJob.perform_later analysis.id
         when "KBIO MHC I"
             KbioMhciAnalyserJob.perform_later analysis.id
         when "KBIO MHC II"
