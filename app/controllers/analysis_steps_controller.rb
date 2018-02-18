@@ -96,7 +96,7 @@ private
         when "MHC I"
             params.require(:mhci_item).permit(:name, :prediction_method, :species, :alleles, :length, :output_sort)
         when "MHC II"
-            params.require(:mhcii_item).permit(:name, :prediction_method, :species, :alleles, :length, :output_sort)
+            params.require(:mhcii_item).permit(:name, :prediction_method, :species, :alleles, :output_sort)
         when "KBIO MHC I"
             params.require(:kbio_mhci_item).permit(:name, :percentile_rank)
         when "KBIO MHC II"
