@@ -21,6 +21,8 @@
                 <br />
                 <% if @tool_item.getType == 'MHC-I'%>
                     <%= render 'mhci'  %>
+                <% elsif @tool_item.getType == 'MHC-II'%>
+                    <%= render 'mhcii'  %>
                 <% elsif @tool_item.getType == 'KBIO-MHC-I'%>
                     <%= render 'kbio_mhci'  %>
                 <% elsif @tool_item.getType == 'KBIO-MHC-II'%>
