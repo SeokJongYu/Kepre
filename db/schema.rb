@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180210075417) do
+ActiveRecord::Schema.define(version: 20180218045236) do
 
   create_table "analyses", force: :cascade do |t|
     t.string "title"
@@ -164,6 +164,31 @@ ActiveRecord::Schema.define(version: 20180210075417) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["datum_id"], name: "index_mhcii_items_on_datum_id"
+  end
+
+  create_table "mhcii_results", force: :cascade do |t|
+    t.string "allele"
+    t.integer "seq_num"
+    t.integer "start"
+    t.integer "end"
+    t.string "peptide"
+    t.decimal "consensus_percentile_rank", precision: 10, scale: 5
+    t.string "comblib_core"
+    t.decimal "comblib_score", precision: 10, scale: 5
+    t.decimal "comblib_rank", precision: 10, scale: 5
+    t.string "smm_align_core"
+    t.decimal "smm_align_ic50", precision: 10, scale: 5
+    t.decimal "smm_align_rank", precision: 10, scale: 5
+    t.string "nn_align_core"
+    t.decimal "nn_align_ic50", precision: 10, scale: 5
+    t.decimal "nn_align_rank", precision: 10, scale: 5
+    t.string "sturniolo_core"
+    t.decimal "sturniolo_score", precision: 10, scale: 5
+    t.decimal "sturniolo_rank", precision: 10, scale: 5
+    t.integer "result_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["result_id"], name: "index_mhcii_results_on_result_id"
   end
 
   create_table "projects", force: :cascade do |t|

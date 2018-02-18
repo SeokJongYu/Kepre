@@ -43,7 +43,7 @@ class MhciWorker
       script = File.open(@script_file, "w")
       script.write("#!/bin/sh\n")
       script.write("\n")
-      script.write("#PBS -N Kepre-MHC_I\n")
+      script.write("#PBS -N Kepre-MHC_II\n")
       script.write("#PBS -l nodes=1,walltime=00:05:00\n")
       script.write("#PBS -q batch\n")
       script.write("#PBS -e #{@dir_str}/job_error.out\n")
@@ -52,7 +52,7 @@ class MhciWorker
 
       script.write("\n")
       script.write("cd #{@dir_str} \n")
-      script.write("/usr/local/IEDB/mhc_i/src/predict_binding.py #{mhci_option.getArgs} #{@file_str} > output.txt\n")
+      script.write("/usr/local/IEDB/mhc_ii/mhc_II_binding.py #{mhci_option.getArgs} #{@file_str} > output.txt\n")
 
     rescue IOError => e 
     ensure
@@ -118,7 +118,7 @@ class MhciWorker
     csv = CSV.parse(csv_text, :col_sep =>"\t", :headers => true, :converters => lambda { |s| s.tr("-","") })
     csv.each do |row|
       puts row.to_hash
-      mhc_result = MhciResult.create(row.to_hash)
+      mhc_result = MhciiResult.create(row.to_hash)
       mhc_result.result = result
       mhc_result.save
     

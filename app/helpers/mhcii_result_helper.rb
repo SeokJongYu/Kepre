@@ -1,0 +1,2 @@
+module MhciiResultHelper
+end
