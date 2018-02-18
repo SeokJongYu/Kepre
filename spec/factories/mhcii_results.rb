@@ -5,6 +5,7 @@ FactoryBot.define do
     seq_start 1
     seq_end 1
     peptide "MyString"
+    analysis_method "MyString"
     consensus_percentile_rank "9.99"
     comblib_core "MyString"
     comblib_score "9.99"

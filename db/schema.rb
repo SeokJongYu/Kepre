@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180218045236) do
+ActiveRecord::Schema.define(version: 20180218071655) do
 
   create_table "analyses", force: :cascade do |t|
     t.string "title"
@@ -172,6 +172,7 @@ ActiveRecord::Schema.define(version: 20180218045236) do
     t.integer "start"
     t.integer "end"
     t.string "peptide"
+    t.string "method"
     t.decimal "consensus_percentile_rank", precision: 10, scale: 5
     t.string "comblib_core"
     t.decimal "comblib_score", precision: 10, scale: 5

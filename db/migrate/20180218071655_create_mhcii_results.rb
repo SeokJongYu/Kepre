@@ -6,6 +6,7 @@ class CreateMhciiResults < ActiveRecord::Migration[5.1]
       t.integer :start
       t.integer :end
       t.string :peptide
+      t.string :method
       t.decimal :consensus_percentile_rank, :precision => 10, :scale => 5
       t.string :comblib_core
       t.decimal :comblib_score, :precision => 10, :scale => 5
