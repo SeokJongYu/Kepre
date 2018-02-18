@@ -1,4 +1,4 @@
-class MhciWorker
+class MhciiWorker
   require 'fileutils'
   require 'csv'
 
@@ -34,7 +34,7 @@ class MhciWorker
   def create_script(analysis)
 
     tool_item = analysis.tool_item
-    mhci_option = MhciItem.find(tool_item.itemable_id)
+    mhcii_option = MhciiItem.find(tool_item.itemable_id)
     
     @script_file = @dir_str + '/run.sh'
     @output_file = @dir_str + '/output.txt'
@@ -45,14 +45,13 @@ class MhciWorker
       script.write("\n")
       script.write("#PBS -N Kepre-MHC_II\n")
       script.write("#PBS -l nodes=1,walltime=00:05:00\n")
-      script.write("#PBS -q batch\n")
       script.write("#PBS -e #{@dir_str}/job_error.out\n")
       script.write("#PBS -o #{@dir_str}/job_output.out\n")
       script.write("#PBS -q batch\n")
 
       script.write("\n")
       script.write("cd #{@dir_str} \n")
-      script.write("/usr/local/IEDB/mhc_ii/mhc_II_binding.py #{mhci_option.getArgs} #{@file_str} > output.txt\n")
+      script.write("/usr/local/IEDB/mhc_ii/mhc_II_binding.py #{mhcii_option.getArgs} #{@file_str} > output.txt\n")
 
     rescue IOError => e 
     ensure

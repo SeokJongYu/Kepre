@@ -9,7 +9,7 @@ class MhciiItem < ApplicationRecord
   end
 
   def getArgs
-    "#{prediction_method} \"#{alleles}\" "
+    "#{prediction_method} \"#{alleles}\""
   end
 
   def getMethod

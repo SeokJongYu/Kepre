@@ -21,9 +21,10 @@ while(<IN>){
 	chomp;
 	my ($idx,$res,$h,$percentile)=split;
     if ($first != $idx){
-        print "\n$idx$res";
+        my $leadingzero = sprintf("%04d", $idx);
+        print "\n$leadingzero$res";
         $first = $idx;
     }
-    print "\t". $percentile;
+    print "\t". 1/$percentile;
 }
 close IN;
