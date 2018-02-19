@@ -45,8 +45,10 @@ $(document).on 'turbolinks:load', ->
         return
 
     resize_container = (args) ->
-        screen_width = window.innerWidth
-        screen_height = window.innerHeight - 20
+        #screen_width = window.innerWidth
+        #screen_height = window.innerHeight - 20
+        screen_width = document.getElementById('KBIO_MHCI_chart').offsetWidth
+        screen_height = document.getElementById('KBIO_MHCI_chart').offsetHeight
         d3.select(args.root).style('width', screen_width + 'px').style 'height', screen_height + 'px'
         return
 
