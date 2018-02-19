@@ -43,7 +43,7 @@ class AnalysisStepsController < ApplicationController
         # create tool_item and tool instance
         tool.analysis = analysis
         tool.save
-        analysis.update(tool_item:  tool)
+        analysis.update(tool_item: tool)
 
         @tool_item.save
 

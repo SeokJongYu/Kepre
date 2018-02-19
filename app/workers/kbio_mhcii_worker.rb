@@ -1,4 +1,4 @@
-class KbioMhciWorker
+class KbioMhciiWorker
   require 'fileutils'
   require 'csv'
 
@@ -34,32 +34,32 @@ class KbioMhciWorker
   def create_script(analysis)
 
     tool_item = analysis.tool_item
-    mhci_option = KbioMhciItem.find(tool_item.itemable_id)
+    mhcii_option = KbioMhciiItem.find(tool_item.itemable_id)
     
     @script_file = @dir_str + '/run.sh'
     @output_file = @dir_str + '/output.txt'
     @processing_file = @dir_str + '/raw_data.txt'
     @avg_immune_file = @dir_str + '/avg_immune_score.txt'
-    @cluster_file = @dir_str + '/kbio_mhci_view.json'
-    @percentile_rank = mhci_option.getPercentileRank
+    @cluster_file = @dir_str + '/kbio_mhcii_view.json'
+    @percentile_rank = mhcii_option.getPercentileRank
     begin
       script = File.open(@script_file, "w")
       script.write("#!/bin/sh\n")
       script.write("\n")
-      script.write("#PBS -N Kepre-KBIO-MHC_I\n")
+      script.write("#PBS -N Kepre-KBIO-MHC_II\n")
       script.write("#PBS -l nodes=1,walltime=00:20:00\n")
       script.write("#PBS -e #{@dir_str}/job_error.out\n")
       script.write("#PBS -o #{@dir_str}/job_output.out\n")
       script.write("#PBS -q batch\n")
       script.write("\n")
       script.write("cd #{@dir_str} \n")
-      script.write("/usr/local/IEDB/mhc_i/src/predict_binding.py IEDB_recommended \"HLA-A*01:01,HLA-B*07:02,HLA-A*02:01,HLA-B*08:01,HLA-A*02:03,HLA-B*15:01,HLA-A*02:06,HLA-B*35:01,HLA-A*03:01,HLA-B*40:01,HLA-A*11:01,HLA-B*44:02,HLA-A*23:01,HLA-B*44:03,HLA-A*24:02,HLA-B*51:01,HLA-A*26:01,HLA-B*53:01,HLA-A*30:01,HLA-B*57:01,HLA-A*30:02,HLA-B*58:01,HLA-A*31:01,HLA-A*32:01,HLA-A*33:01,HLA-A*68:01,HLA-A*68:02\" \"9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9,9\" #{@file_str} > output.txt\n")
+      script.write("/usr/local/IEDB/mhc_ii/mhc_II_binding.py IEDB_recommended \"DRB1*01:01,DRB1*03:01,DRB1*04:01,DRB1*04:05,DRB1*07:01,DRB1*08:02,DRB1*09:01,DRB1*11:01,DRB1*12:01,DRB1*13:02,DRB1*15:01,DRB3*01:01,DRB3*02:02,DRB4*01:01,DRB5*01:01\"  #{@file_str} > output.txt\n")
       #paring output data
-      script.write("perl /usr/local/IEDB/KBIO/mk_mhc_i_pred_mat.pl -fasta #{@file_str} -HLA_file /usr/local/IEDB/KBIO/allele27.list -curl_out #{@output_file} -percentile_rank #{@percentile_rank} > #{@processing_file} 2> err2.txt\n")
+      script.write("perl /usr/local/IEDB/KBIO/mk_mhc_ii_pred_mat.pl -fasta #{@file_str} -HLA_file /usr/local/IEDB/KBIO/allele26.list -curl_out #{@output_file} -percentile_rank #{@percentile_rank} -use_core_seq > #{@processing_file} 2> err2.txt\n")
 
       script.write("perl /usr/local/IEDB/KBIO/avg_immune.pl #{@processing_file} > #{@avg_immune_file}\n")
 
-      script.write("perl /usr/local/IEDB/KBIO/create_matrix.pl #{@processing_file} > mat.txt\n")
+      script.write("perl /usr/local/IEDB/KBIO/create_matrix_ii.pl #{@processing_file} > mat.txt\n")
       script.write("python /usr/local/IEDB/KBIO/create_clustergrammer.py \n")
 
     rescue IOError => e 
@@ -67,7 +67,6 @@ class KbioMhciWorker
       script.close unless script.nil?
     end
   end
-
 
   def lanch_torque_job(analysis)
     @b = PBS::Batch.new(
@@ -131,7 +130,7 @@ class KbioMhciWorker
     csv.each do |row|
       if row['percentile_rank'].to_f < @percentile_rank.to_f
         #puts row.to_hash
-        mhc_result = MhciResult.create(row.to_hash)
+        mhc_result = MhciiResult.create(row.to_hash)
         mhc_result.result = result
         mhc_result.save
       end
@@ -142,7 +141,7 @@ class KbioMhciWorker
     csv_prog = CSV.parse(csv_text2, :col_sep =>" ", :headers => true)
     csv_prog.each do |row2|
       #puts row2.to_hash
-      kbio_mhc_result = KbioMhciResult.create(row2.to_hash)
+      kbio_mhc_result = KbioMhciiResult.create(row2.to_hash)
       kbio_mhc_result.result = result
       kbio_mhc_result.save
     
