@@ -25,7 +25,7 @@ class MhciiWorker
     datum = analysis.datum
     project = analysis.project
 
-    @dir_str = "/tmp/kepre/" + project.title + "/" + analysis.id.to_s
+    @dir_str = "/home/codegen/tmp/kepre/" + project.title + "/" + analysis.id.to_s
     @file_str = @dir_str + '/' + datum.name 
     FileUtils::mkdir_p @dir_str
     File.open(@file_str, "w") {|f| f.write(datum.content)}
@@ -58,7 +58,6 @@ class MhciiWorker
       script.close unless script.nil?
     end
   end
-
 
   def lanch_torque_job(analysis)
     @b = PBS::Batch.new(

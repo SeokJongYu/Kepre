@@ -12,7 +12,7 @@ class KbioMhciiItem < ApplicationRecord
     "#{percentile_rank}"
   end
 
-  def getPercentile
+  def getPercentileRank
     percentile_rank
   end
 
