@@ -9,7 +9,7 @@ net.load_file('mat.txt')
 net.cluster()
 
 # save visualization JSON to file for use by front end
-net.write_json_to_file('viz', 'kbio_mhci_view.json')
+net.write_json_to_file('viz', 'kbio_mhcii_view.json')
 
 net2 = Network()
 net2.load_file('mat2.txt')
@@ -18,4 +18,4 @@ net2.load_file('mat2.txt')
 net2.cluster()
 
 # save visualization JSON to file for use by front end
-net2.write_json_to_file('viz', 'kbio_mhci_view_summary.json')
+net2.write_json_to_file('viz', 'kbio_mhcii_view_summary.json')

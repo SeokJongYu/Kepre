@@ -14,6 +14,7 @@ $(document).on 'turbolinks:load', ->
         'dendro_callback': dendro_callback
         'matrix_update_callback': matrix_update_callback
         'cat_update_callback': cat_update_callback
+        'tile_colors': ['#FF0000','##FFFF00']
         'sidebar_width': 150
 
     matrix_update_callback = ->

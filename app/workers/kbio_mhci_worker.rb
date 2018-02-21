@@ -60,6 +60,7 @@ class KbioMhciWorker
       script.write("perl /usr/local/IEDB/KBIO/avg_immune.pl #{@processing_file} > #{@avg_immune_file}\n")
 
       script.write("perl /usr/local/IEDB/KBIO/create_matrix.pl #{@processing_file} > mat.txt\n")
+      script.write("perl /usr/local/IEDB/KBIO/create_summary_matrix_i.pl #{@processing_file} > mat2.txt\n")
       script.write("python /usr/local/IEDB/KBIO/create_clustergrammer.py \n")
 
     rescue IOError => e 
