@@ -25,11 +25,11 @@ while(<IN>){
         print "\n$leadingzero$res";
         $first = $idx;
     }
-    if ($percentile <= 1){
+    if ($percentile <= 0.1){
         print "\t". 100;
-    }elsif($percentile <= 5){
+    }elsif($percentile <= 0.5){
         print "\t". 50;
-    }elsif($percentile <= 10){
+    }elsif($percentile <= 1){
         print "\t". -50;
     }else{
         print "\t". 0;
