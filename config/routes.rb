@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
 
+  devise_for :users
   get 'mhcii_result/show'
 
   get 'mhcii_result/plot'

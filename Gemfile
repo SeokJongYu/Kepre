@@ -45,6 +45,7 @@ gem 'rails-clustergrammer', '~> 0.1.0'
 gem 'underscore-rails', '~> 1.8', '>= 1.8.3'
 gem 'd3_rails', '~> 4.1', '>= 4.1.1'
 
+gem 'devise', '~> 4.4', '>= 4.4.1'
 gem 'friendly_id', '~> 5.1.0' # Note: You MUST use 5.0.0 or greater for Rails 4.0+
 
 # for testing with Rspec
