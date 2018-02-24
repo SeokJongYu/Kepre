@@ -5,6 +5,7 @@ class Project < ApplicationRecord
     validates :title, length: {maximum: 100}
     has_many :data, dependent: :destroy
     has_many :analyses
+    belongs_to :user
     
     def should_generate_new_friendly_id?
         title_changed?
