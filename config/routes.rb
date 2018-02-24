@@ -1,10 +1,6 @@
 Rails.application.routes.draw do
 
-
   devise_for :users
-  get 'mhcii_result/show'
-
-  get 'mhcii_result/plot'
 
   get 'kbio_mhci_result/show'
   get 'kbio_mhci_result/plot'
@@ -15,9 +11,8 @@ Rails.application.routes.draw do
   get 'mhci_result/show'
   get 'mhci_result/plot'
 
-  get 'totalanalysis' => 'static#total_analysis', as: :totalanalysis
-
-  get 'pbs' => 'pbs#jobs'
+  get 'mhcii_result/show'
+  get 'mhcii_result/plot'
 
   resources :projects do
     resources :data
