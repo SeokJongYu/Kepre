@@ -41,6 +41,7 @@ class KbioMhciWorker
     @processing_file = @dir_str + '/raw_data.txt'
     @avg_immune_file = @dir_str + '/avg_immune_score.txt'
     @cluster_file = @dir_str + '/kbio_mhci_view.json'
+    @cluster_file_summary = @dir_str + '/kbio_mhci_view_summary.json'
     @percentile_rank = mhci_option.getPercentileRank
     begin
       script = File.open(@script_file, "w")
@@ -120,12 +121,19 @@ class KbioMhciWorker
     result = Result.new()
     result.location = @output_file
     result.output = @cluster_file
+    result.output2 = @cluster_file_summary;
     result.analysis = analysis
-    result.save
+
     puts "post processing"
     puts @output_file
     puts @processing_file
     puts @percentile_rank
+    puts @avg_immune_file
+
+    avg_data = File.readlines(@avg_immune_file)
+    avg_value = avg_data[0].strip.split(" ")
+    result.score = avg_value[1]
+    result.save
 
     csv_text = File.read(@output_file)
     csv = CSV.parse(csv_text, :col_sep =>"\t", :headers => true, :converters => lambda { |s| s.tr("-","") })
