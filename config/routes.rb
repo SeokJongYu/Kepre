@@ -4,9 +4,11 @@ Rails.application.routes.draw do
 
   get 'kbio_mhci_result/show'
   get 'kbio_mhci_result/plot'
+  get 'kbio_mhci_result/report'
 
   get 'result/show'
   get 'result/plot'
+  get 'result/report'
 
   get 'mhci_result/show'
   get 'mhci_result/plot'
