@@ -47,6 +47,8 @@ gem 'd3_rails', '~> 4.1', '>= 4.1.1'
 
 gem 'devise', '~> 4.4', '>= 4.4.1'
 gem 'friendly_id', '~> 5.1.0' # Note: You MUST use 5.0.0 or greater for Rails 4.0+
+gem 'prawn', '~> 2.2', '>= 2.2.2'
+gem 'prawn-table'
 
 # for testing with Rspec
 gem 'rspec-rails', '~> 3.7', :group => [:test, :development]
