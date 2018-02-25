@@ -2,7 +2,7 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 $(document).on 'turbolinks:load', ->
-    return unless page.controller() == 'kbio_mhci_result' && page.action() == 'plot'
+    return unless page.controller() == 'kbio_mhci_result' && page.action() == 'plot2'
 
     about_string = 'Zoom, scroll, and click buttons to interact with the clustergram. <a href="http://amp.pharm.mssm.edu/clustergrammer/help"> <i class="fa fa-question-circle" aria-hidden="true"></i> </a>'
     args = 
@@ -11,11 +11,11 @@ $(document).on 'turbolinks:load', ->
         'about': about_string
         'col_tip_callback': test_col_callback
         'tile_tip_callback': test_tile_callback
-        'dendro_callback': dendro_callback
         'col_label_scale': 1.5
+        'dendro_callback': dendro_callback
         'matrix_update_callback': matrix_update_callback
         'cat_update_callback': cat_update_callback
-        'tile_colors': ['#FF0000','##FFFF00']
+        'tile_colors': ['#FF0000','#FFFF00']
         'sidebar_width': 150
 
     matrix_update_callback = ->
