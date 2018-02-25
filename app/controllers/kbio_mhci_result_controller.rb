@@ -10,6 +10,13 @@ class KbioMhciResultController < ApplicationController
     @analysis = Analysis.find(params[:analysis_id])
   end
 
+  def plot2
+    @results = Result.find_by_id(params[:result_id])
+    @json = read_file(@results.output2)
+    @analysis = Analysis.find(params[:analysis_id])
+  end
+
+
   def report
     @rawdata = KbioMhciResult.where("result_id = ? and score < 1", params[:result_id]).order(score: :asc)
     @results = Result.find_by_id(params[:result_id])
