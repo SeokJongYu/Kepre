@@ -1,3 +1,5 @@
+require 'bio'
+
 class DataController < ApplicationController
   before_action :get_project
   before_action :set_datum, only: [:show, :edit, :update, :destroy]
@@ -18,6 +20,7 @@ class DataController < ApplicationController
   # GET /data/1.json
   def show
     @analyses = Analysis.where( datum_id: @datum.id)
+    @fasta = Bio::FastaFormat.new(@datum.content)
   end
 
   # GET /data/new
@@ -84,4 +87,18 @@ class DataController < ApplicationController
     #def get_project
     #  @project = Project.find(params[:project_id])
     #end
+
+
+    def hash_to_html key,value
+      if value.nil?
+        puts "<li>#{key}</li>"
+      elsif value.is_a?(Hash)
+        puts "<li>#{key}"
+        puts "<ul>"
+        value.each(&method(:hash_to_html))
+        puts "</ul></li>"
+      else
+        fail "I don't know what to do with a #{value.class}"
+      end
+   end
 end
