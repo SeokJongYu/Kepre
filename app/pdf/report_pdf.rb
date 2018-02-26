@@ -1,9 +1,15 @@
+require 'bio'
+
 class ReportPdf < Prawn::Document
     def initialize(analysis, results, seq)
         super(top_margin: 50)
         @analysis = analysis
         @results = results
         @seq = seq
+        @fasta = Bio::FastaFormat.new(@seq.content)
+        puts @fasta.aaseq
+        @par_seq = @fasta.aaseq.to_s
+        @fasta_seq = Bio::Sequence.auto(@fasta.aaseq)
         print_cover
         seq_info
         top_peptide
@@ -44,11 +50,33 @@ class ReportPdf < Prawn::Document
     end
 
     def line_item_rows
+        @rank = 0
         table_data =[]
-        header = ["Seq position","amino acid","allele","score"]
+        header = ["Seq position","peptide", "length","allele","ranke"]
         table_data << header
         @results.each do |item|
-            table_data << [item.seq_id, item.aa, item.allele, item.score]
+            puts item.seq_id, item.aa, item.allele, item.score
+            if @rank == 0
+                @allele = item.allele
+                @rank = item.score
+                @pos = item.seq_id
+                @length = 1
+            elsif @rank == item.score and @allele == item.allele and @rank != 0
+                #store addtional seq
+                @length = @length + 1
+                @rank = item.score
+            elsif (@rank != item.score or @allele != item.allele) and @rank != 0
+
+                puts @pos, @length
+                @pep_seq = @par_seq[@pos-1,@length]
+                #pep_seq = @fasta_seq.subseq(@pos,@length)
+                table_data << [@pos, @pep_seq, @length, @allele, @rank]
+
+                @allele = item.allele
+                @rank = item.score
+                @pos = item.seq_id
+                @length = 1
+            end
         end
         table_data
     end

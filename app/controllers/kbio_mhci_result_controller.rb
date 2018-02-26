@@ -18,7 +18,8 @@ class KbioMhciResultController < ApplicationController
 
 
   def report
-    @rawdata = KbioMhciResult.where("result_id = ? and score < 1", params[:result_id]).order(score: :asc)
+    @rawdata = KbioMhciResult.where("result_id = ? and score < 1", params[:result_id]).order(score: :asc, allele: :desc)
+    #@rawdata = MhciResult.where("result_id = ? and percentile_rank < 0.5", params[:result_id]).order(percentile_rank: :asc).distinct
     @results = Result.find_by_id(params[:result_id])
     #@json = read_file(@results.output)
     @analysis = Analysis.find(params[:analysis_id])
