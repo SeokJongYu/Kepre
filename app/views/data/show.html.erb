@@ -135,9 +135,11 @@
                           <div class="project_detail">
 
                             <p class="title">Data type</p>
-                            <p>FASTA</p>
+                            <p><%= @datum.data_type%></p>
                             <p class="title">Created date</p>
-                            <p>2018/1/17</p>
+                            <p><%= @datum.created_at.strftime("%F %H:%M")%></p>
+                            <p class="title">Updated date</p>
+                            <p><%= @datum.updated_at.strftime("%F %H:%M")%></p>
                           </div>
 
                           <br />
@@ -145,7 +147,7 @@
                           <ul class="list-unstyled project_files">
                             <li><a href=""><i class="fa fa-file-word-o"></i> Length : 123bp</a>
                             </li>
-                            <li><a href=""><i class="fa fa-file-pdf-o"></i> GC % : 45%</a>
+                            <li><a href=""><i class="fa fa-file-pdf-o"></i> etc </a>
                             </li>
                             <li><a href=""><i class="fa fa-mail-forward"></i> etc </a>
                             </li>
