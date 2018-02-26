@@ -32,7 +32,8 @@
                     <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Data type <span class="required">*</span>
                     </label>
                     <div class="col-md-6 col-sm-6 col-xs-12">
-                      <%= form.text_field :data_type, id: :datum_type,  class: 'form-control col-md-7 col-xs-12', required: true %>
+                      <%= form.select :data_type, ['FASTA', 'PDB'], :prompt => 'Select data type', class: 'form-control col-md-7 col-xs-12', required: true %>
+                      
                     </div>
                   </div>
 
