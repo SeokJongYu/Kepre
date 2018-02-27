@@ -92,4 +92,11 @@ class AnalysesController < ApplicationController
     def set_datum
       @datum = Datum.find(params[:datum_id])
     end
+
+    def update_analyses_info
+      @dashboard = current_user.dashboard
+      @curr_analysis = @dashboard.analysis_count
+      @dashboard.analysis_count = @curr_analysis + 1
+      @dashboard.save
+    end
 end

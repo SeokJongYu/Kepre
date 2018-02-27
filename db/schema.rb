@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180225105331) do
+ActiveRecord::Schema.define(version: 20180226234503) do
 
   create_table "analyses", force: :cascade do |t|
     t.string "title"
@@ -44,6 +44,18 @@ ActiveRecord::Schema.define(version: 20180225105331) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["datum_id"], name: "index_class_immu_items_on_datum_id"
+  end
+
+  create_table "dashboards", force: :cascade do |t|
+    t.integer "project_count"
+    t.integer "analysis_count"
+    t.integer "execution_time"
+    t.decimal "avg_time"
+    t.integer "total_data"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_dashboards_on_user_id"
   end
 
   create_table "data", force: :cascade do |t|

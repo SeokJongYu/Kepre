@@ -6,6 +6,7 @@ class User < ApplicationRecord
          :validatable, authentication_keys: [:login]
   
   has_many :projects
+  has_one :dashboard
   
   # Virtual attribute for authenticating by either username or email
   # This is in addition to a real persisted field like 'username'

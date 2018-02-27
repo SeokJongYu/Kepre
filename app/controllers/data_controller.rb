@@ -39,6 +39,7 @@ class DataController < ApplicationController
 
     respond_to do |format|
       if @datum.save
+        update_data_info
         format.html { redirect_to project_url(@project), notice: 'Datum was successfully created.' }
         format.json { render :show, status: :created, location: @datum }
       else
@@ -88,17 +89,10 @@ class DataController < ApplicationController
     #  @project = Project.find(params[:project_id])
     #end
 
-
-    def hash_to_html key,value
-      if value.nil?
-        puts "<li>#{key}</li>"
-      elsif value.is_a?(Hash)
-        puts "<li>#{key}"
-        puts "<ul>"
-        value.each(&method(:hash_to_html))
-        puts "</ul></li>"
-      else
-        fail "I don't know what to do with a #{value.class}"
-      end
-   end
+    def update_data_info
+      @dashboard = current_user.dashboard
+      @curr_data = @dashboard.total_data
+      @dashboard.total_data = @curr_data + 1
+      @dashboard.save
+    end
 end

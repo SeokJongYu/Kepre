@@ -5,6 +5,7 @@ class ProjectsController < ApplicationController
   # GET /projects.json
   def index
     @projects = current_user.projects.all
+    @dashboard = current_user.dashboard
   end
 
   # GET /projects/1
@@ -29,6 +30,14 @@ class ProjectsController < ApplicationController
 
     respond_to do |format|
       if @project.save
+        #update dashboard
+        if current_user.dashboard == nil
+          # @dashboard_new = Dashboard.create(project_count: 0, analysis_count: 0, execution_time: 0, avg_time: 0.0, total_data: 0)
+          # current_user.dashboard = @dashboard_new
+          @dashboard = current_user.create_dashboard(project_count: 0, analysis_count: 0, execution_time: 0, avg_time: 0.0, total_data: 0)
+          @dashboard.save
+        end
+        update_project_info
         format.html { redirect_to @project, notice: 'Project was successfully created.' }
         format.json { render :show, status: :created, location: @project }
       else
@@ -56,6 +65,7 @@ class ProjectsController < ApplicationController
   # DELETE /projects/1.json
   def destroy
     @project.destroy
+    update_project_info
     respond_to do |format|
       format.html { redirect_to projects_url, notice: 'Project was successfully destroyed.' }
       format.json { head :no_content }
@@ -71,5 +81,11 @@ class ProjectsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def project_params
       params.require(:project).permit(:title, :description)
+    end
+
+    def update_project_info
+      @dashboard = current_user.dashboard
+      @dashboard.project_count = current_user.projects.count
+      @dashboard.save
     end
 end
