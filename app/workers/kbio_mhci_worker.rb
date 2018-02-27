@@ -3,6 +3,7 @@ class KbioMhciWorker
   require 'csv'
 
   def exec(analysis_id)
+    time_start = Time.new
     #if you want get array arguments, just use *args
     # create input file in user's project directory 
     # define the args that is relayed from wicked wizard process
@@ -19,6 +20,9 @@ class KbioMhciWorker
     poll_job(analysis)
     post_processing(analysis)
 
+    time_finish = Time.new
+    diff = time_finish - time_start
+    update_dashboard_info(diff)
   end
 
   def create_data(analysis)
@@ -160,6 +164,15 @@ class KbioMhciWorker
     analysis.status = "Finish"
     analysis.save
     
+  end
+
+  def update_dashboard_info(time)
+    dashboard = current_user.dashboard
+    curr_data = dashboard.execution_time
+    dashboard.execution_time = curr_data + time
+    avg = dashboard.avg_time
+    dashboard.avg_time = (avg + time) / dashboard.analysis_count
+    dashboard.save
   end
 
 end
