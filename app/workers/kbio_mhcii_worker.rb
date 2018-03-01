@@ -2,7 +2,8 @@ class KbioMhciiWorker
   require 'fileutils'
   require 'csv'
 
-  def exec(analysis_id)
+  def exec(analysis_id, user_id)
+    time_start = Time.new
     #if you want get array arguments, just use *args
     # create input file in user's project directory 
     # define the args that is relayed from wicked wizard process
@@ -18,6 +19,11 @@ class KbioMhciiWorker
     # monitoring analysis job and do post processing
     poll_job(analysis)
     post_processing(analysis)
+
+    time_finish = Time.new
+    diff = time_finish - time_start
+    update_dashboard_info(diff, user_id)
+  end
 
   end
 
@@ -47,14 +53,14 @@ class KbioMhciiWorker
       script = File.open(@script_file, "w")
       script.write("#!/bin/sh\n")
       script.write("\n")
-      script.write("#PBS -N Kepre-KBIO-MHC_II\n")
+      script.write("#PBS -N KBIO-MHC_II\n")
       script.write("#PBS -l nodes=1,walltime=00:20:00\n")
       script.write("#PBS -e #{@dir_str}/job_error.out\n")
       script.write("#PBS -o #{@dir_str}/job_output.out\n")
       script.write("#PBS -q batch\n")
       script.write("\n")
       script.write("cd #{@dir_str} \n")
-      script.write("/usr/local/IEDB/mhc_ii/mhc_II_binding.py IEDB_recommended \"DRB1*01:01,DRB1*03:01,DRB1*04:01,DRB1*04:05,DRB1*07:01,DRB1*08:02,DRB1*09:01,DRB1*11:01,DRB1*12:01,DRB1*13:02,DRB1*15:01,DRB3*01:01,DRB3*02:02,DRB4*01:01,DRB5*01:01\"  #{@file_str} > output.txt\n")
+      script.write("/usr/local/IEDB/mhc_ii/mhc_II_binding.py IEDB_recommended \"DRB1*01:01,DRB1*03:01,DRB1*04:01,DRB1*04:05,DRB1*07:01,DRB1*08:02,DRB1*09:01,DRB1*11:01,DRB1*12:01,DRB1*13:02,DRB1*15:01,DRB3*01:01,DRB3*02:02,DRB4*01:01,DRB5*01:01\" #{@file_str} > output.txt\n")
       #paring output data
       script.write("perl /usr/local/IEDB/KBIO/mk_mhc_ii_pred_mat.pl -fasta #{@file_str} -HLA_file /usr/local/IEDB/KBIO/allele26.list -curl_out #{@output_file} -percentile_rank #{@percentile_rank} -use_core_seq > #{@processing_file} 2> err2.txt\n")
 
@@ -62,7 +68,7 @@ class KbioMhciiWorker
 
       script.write("perl /usr/local/IEDB/KBIO/create_matrix_ii.pl #{@processing_file} > mat.txt\n")
       script.write("perl /usr/local/IEDB/KBIO/create_summary_matrix_ii.pl #{@processing_file} > mat2.txt\n")
-      script.write("python /usr/local/IEDB/KBIO/create_clustergrammer.py \n")
+      script.write("python /usr/local/IEDB/KBIO/create_clustergrammer_mhcii.py \n")
 
     rescue IOError => e 
     ensure
@@ -158,6 +164,15 @@ class KbioMhciiWorker
     analysis.status = "Finish"
     analysis.save
     
+  end
+
+  def update_dashboard_info(time, user_id)
+    dashboard = current_user.dashboard
+    curr_data = dashboard.execution_time
+    dashboard.execution_time = curr_data + time
+    avg = dashboard.avg_time
+    dashboard.avg_time = (avg + time) / dashboard.analysis_count
+    dashboard.save
   end
 
 end

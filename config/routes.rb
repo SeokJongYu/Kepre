@@ -7,6 +7,11 @@ Rails.application.routes.draw do
   get 'kbio_mhci_result/plot2'
   get 'kbio_mhci_result/report'
 
+  get 'kbio_mhcii_result/show'
+  get 'kbio_mhcii_result/plot'
+  get 'kbio_mhcii_result/plot2'
+  get 'kbio_mhcii_result/report'
+
   get 'result/show'
   get 'result/plot'
   get 'result/plot2'
