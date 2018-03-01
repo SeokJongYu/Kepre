@@ -2,7 +2,7 @@ class KbioMhciWorker
   require 'fileutils'
   require 'csv'
 
-  def exec(analysis_id)
+  def exec(analysis_id, user_id)
     time_start = Time.new
     #if you want get array arguments, just use *args
     # create input file in user's project directory 
@@ -22,7 +22,7 @@ class KbioMhciWorker
 
     time_finish = Time.new
     diff = time_finish - time_start
-    update_dashboard_info(diff)
+    update_dashboard_info(diff, user_id)
   end
 
   def create_data(analysis)
@@ -51,7 +51,7 @@ class KbioMhciWorker
       script = File.open(@script_file, "w")
       script.write("#!/bin/sh\n")
       script.write("\n")
-      script.write("#PBS -N Kepre-KBIO-MHC_I\n")
+      script.write("#PBS -N KBIO-MHC_I\n")
       script.write("#PBS -l nodes=1,walltime=00:20:00\n")
       script.write("#PBS -e #{@dir_str}/job_error.out\n")
       script.write("#PBS -o #{@dir_str}/job_output.out\n")
@@ -166,7 +166,8 @@ class KbioMhciWorker
     
   end
 
-  def update_dashboard_info(time)
+  def update_dashboard_info(time, user_id)
+    current_user = User.find(user_id)
     dashboard = current_user.dashboard
     curr_data = dashboard.execution_time
     dashboard.execution_time = curr_data + time
