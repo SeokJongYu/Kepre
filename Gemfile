@@ -39,6 +39,8 @@ gem 'gentelella-rails'
 gem 'modernizr-rails'
 gem 'pbs'
 gem 'bio', '~> 1.5', '>= 1.5.1'
+gem 'stringio'
+
 gem 'wicked'
 gem 'sidekiq'
 gem 'rails-clustergrammer', '~> 0.1.0'

@@ -1,10 +1,9 @@
 require 'bio'
+require 'stringio'
 
 class DataController < ApplicationController
   before_action :get_project
   before_action :set_datum, only: [:show, :edit, :update, :destroy]
-
-
 
   def get_project
     @project = Project.friendly.find(params[:project_id])
@@ -35,11 +34,47 @@ class DataController < ApplicationController
   # POST /data
   # POST /data.json
   def create
-    @datum = @project.data.new(datum_params)
+
+    flag = 0
+    count = 0
+    if params[:datum][:content] != nil
+
+      fasta_cont = StringIO.new(params[:datum][:content])
+      seqs = Bio::FlatFile.auto(fasta_cont)
+      check = seqs.count
+      if check == 1
+        puts "enter 1"
+        @datum = @project.data.new(datum_params)
+        if @datum.save
+          flag = 1
+          count = 1
+        end
+
+      elsif check > 1
+        puts "enter 2"
+        fasta_cont = StringIO.new(params[:datum][:content])
+        seqs = Bio::FlatFile.auto(fasta_cont)
+        seqs.each do |seq|
+          puts seq
+          count = count + 1
+          title = "#{params[:datum][:name]}_#{count}"
+          type = params[:datum][:data_type]
+
+          @datum = @project.data.new()
+          @datum.name = title
+          @datum.content = seq
+          @datum.data_type = type
+          if @datum.save
+            flag = 1
+          end
+        end
+      end
+
+    end
 
     respond_to do |format|
-      if @datum.save
-        update_data_info
+      if flag #@datum.save
+        update_data_info(count)
         format.html { redirect_to project_url(@project), notice: 'Datum was successfully created.' }
         format.json { render :show, status: :created, location: @datum }
       else
@@ -89,10 +124,10 @@ class DataController < ApplicationController
     #  @project = Project.find(params[:project_id])
     #end
 
-    def update_data_info
+    def update_data_info(count)
       @dashboard = current_user.dashboard
       @curr_data = @dashboard.total_data
-      @dashboard.total_data = @curr_data + 1
+      @dashboard.total_data = @curr_data + count
       @dashboard.save
     end
 end
