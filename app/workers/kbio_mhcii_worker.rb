@@ -60,7 +60,7 @@ class KbioMhciiWorker
       script.write("#PBS -q batch\n")
       script.write("\n")
       script.write("cd #{@dir_str} \n")
-      script.write("/usr/local/IEDB/mhc_ii/mhc_II_binding.py IEDB_recommended \"DRB1*01:01,DRB1*03:01,DRB1*04:01,DRB1*04:05,DRB1*07:01,DRB1*08:02,DRB1*09:01,DRB1*11:01,DRB1*12:01,DRB1*13:02,DRB1*15:01,DRB3*01:01,DRB3*02:02,DRB4*01:01,DRB5*01:01\" #{@file_str} > output.txt\n")
+      script.write("echo #{@file_str} | /usr/local/IEDB/mhc_ii/mhc_II_binding.py IEDB_recommended \"DRB1*01:01,DRB1*03:01,DRB1*04:01,DRB1*04:05,DRB1*07:01,DRB1*08:02,DRB1*09:01,DRB1*11:01,DRB1*12:01,DRB1*13:02,DRB1*15:01,DRB3*01:01,DRB3*02:02,DRB4*01:01,DRB5*01:01\" > output.txt\n")
       #paring output data
       script.write("perl /usr/local/IEDB/KBIO/mk_mhc_ii_pred_mat.pl -fasta #{@file_str} -HLA_file /usr/local/IEDB/KBIO/allele26.list -curl_out #{@output_file} -percentile_rank #{@percentile_rank} -use_core_seq > #{@processing_file} 2> err2.txt\n")
 

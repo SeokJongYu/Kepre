@@ -51,7 +51,7 @@ class MhciiWorker
 
       script.write("\n")
       script.write("cd #{@dir_str} \n")
-      script.write("/usr/local/IEDB/mhc_ii/mhc_II_binding.py #{mhcii_option.getArgs} #{@file_str} > output.txt\n")
+      script.write("echo #{@file_str} | /usr/local/IEDB/mhc_ii/mhc_II_binding.py #{mhcii_option.getArgs} > output.txt\n")
 
     rescue IOError => e 
     ensure
