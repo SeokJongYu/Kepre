@@ -2,14 +2,14 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 $(document).on 'turbolinks:load', ->
-  return unless page.controller() == 'mhci_result' && page.action() == 'plot'
+  return unless page.controller() == 'mhcii_result' && page.action() == 'plot'
   jQuery ->
     Morris.Line
       element: 'MHCII_chart'
       data: $('#MHCII_chart').data('results')
-      xkey: 'id'
-      ykeys: ['consensus_percentile_rank','smm_align_rank','nn_align_rank']
-      labels: ['consensus_percentile_rank','smm_align_rank','nn_align_rank']
+      xkey: 'consensus_percentile_rank'
+      ykeys: ['consensus_percentile_rank','smm_align_rank','nn_align_rank', 'sturniolo_rank']
+      labels: ['consensus_percentile_rank','smm_align_rank','nn_align_rank', 'sturniolo_rank']
       parseTime: false
       xLabelMargin: 10
       hoverCallback: (index, options) ->
