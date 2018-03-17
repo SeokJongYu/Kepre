@@ -1,0 +1,99 @@
+<!-- page content -->
+<div class="">
+    <div class="page-title">
+        <div class="title_left">
+            <h3>Analysis Job Monitoring</h3>
+        </div>
+
+        <div class="title_right">
+            <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Search for...">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" type="button">Go!</button>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="clearfix"></div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="x_panel">
+
+                <div class="x_content">
+
+                    <h4>Analysis List</h4>
+
+                    <!-- /.row -->
+                    <div class="clearfix"></div>
+                    <!-- Table row -->
+                    <div class="row">
+                        <div class="col-xs-12 table">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Name</th>
+                                        <th>Description</th>
+                                        <th>Tool</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <% if @analyses != nil %>
+                                        <% @analyses.each do |analysis| %>
+                                            <tr>
+                                                <% @tool_content = analysis.tool_item.itemable.getType %>
+                                                    <td>
+                                                        <%= analysis.id %>
+                                                    </td>
+                                                    <td>
+                                                        <%= analysis.title %>
+                                                    </td>
+                                                    <td>
+                                                        <%= analysis.description %>
+                                                    </td>
+                                                    <td>
+                                                        <%= @tool_content %>
+                                                    </td>
+                                                    <td>
+                                                        <button type="button" class="btn btn-info btn-sm">
+                                                            <span class="glyphicon glyphicon-cog"></span>
+                                                            <%= analysis.status %>
+                                                        </button>
+                                                        <% result = analysis.result %>
+                                                        <!--
+                                                        <% if analysis.status == "Finish" %>
+                                                            <%= link_to '<i class="fa fa-wrench"></i> Result Table'.html_safe, result_show_path(:tool_type => @tool_content, :result_id => result.id, :analysis_id => analysis.id ), :class=>"btn btn-primary" %>
+                                                            <%= link_to '<i class="fa fa-wrench"></i> Plot'.html_safe, result_plot_path(:tool_type => @tool_content, :result_id => result.id, :analysis_id => analysis.id ), :class=>"btn btn-primary" %>
+                                                            <%= link_to '<i class="fa fa-wrench"></i> Plot(summary)'.html_safe, result_plot2_path(:tool_type => @tool_content, :result_id => result.id, :analysis_id => analysis.id ), :class=>"btn btn-primary" %>
+                                                            <%= link_to '<i class="fa fa-wrench"></i> Report'.html_safe, result_report_path(:tool_type => @tool_content, :result_id => result.id, :analysis_id => analysis.id ), :class=>"btn btn-primary", :target => "_blank" %>
+                                                        <% end %>
+                                                        -->
+                                                        <!-- %= link_to 'Show', project_datum_path(@project, datum.id) % -->
+                                                        <!-- %= link_to 'Edit', edit_project_datum_path(@project, datum) % -->
+                                                    </td>
+                                            </tr>
+                                        <%end%>
+                                    <% else %>
+                                        <tr>
+                                            <td colspan="5">There is any job that running on cluster </td>
+                                        </tr>
+                                    <% end %>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                    <!-- /.row -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- /page content -->
