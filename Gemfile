@@ -39,7 +39,7 @@ gem 'gentelella-rails'
 gem 'modernizr-rails'
 gem 'pbs'
 gem 'bio', '~> 1.5', '>= 1.5.1'
-gem 'stringio'
+gem 'rio', '~> 0.6.0'
 
 gem 'wicked'
 gem 'sidekiq'

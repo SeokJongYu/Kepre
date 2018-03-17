@@ -2,7 +2,7 @@ class KbioMhciiWorker
   require 'fileutils'
   require 'csv'
 
-  def exec(analysis_id, user_id)
+  def exec(analysis_id)
     time_start = Time.new
     #if you want get array arguments, just use *args
     # create input file in user's project directory 
@@ -10,6 +10,9 @@ class KbioMhciiWorker
     # it should the analysis id as serialized arguments and placed into the Redis queue
     
     analysis = Analysis.find(analysis_id)
+    user = analysis.project.user
+    user_id = user.id
+
     # make input file
     create_data(analysis)
     # make run.sh script
@@ -18,14 +21,13 @@ class KbioMhciiWorker
     lanch_torque_job(analysis)
     # monitoring analysis job and do post processing
     poll_job(analysis)
-    post_processing(analysis)
+    post_processing(analysis, user_id)
 
     time_finish = Time.new
     diff = time_finish - time_start
     update_dashboard_info(diff, user_id)
   end
 
-  end
 
   def create_data(analysis)
     datum = analysis.datum
@@ -47,7 +49,7 @@ class KbioMhciiWorker
     @processing_file = @dir_str + '/raw_data.txt'
     @avg_immune_file = @dir_str + '/avg_immune_score.txt'
     @cluster_file = @dir_str + '/kbio_mhcii_view.json'
-    @cluster_file_summary = @dir_str + '/kbio_mhci_view_summary.json'
+    @cluster_file_summary = @dir_str + '/kbio_mhcii_view_summary.json'
     @percentile_rank = mhcii_option.getPercentileRank
     begin
       script = File.open(@script_file, "w")
@@ -118,7 +120,9 @@ class KbioMhciiWorker
     end
   end
 
-  def post_processing(analysis)
+  def post_processing(analysis, user_id)
+    puts user_id
+    puts "----------"
     analysis.status = "Post processing"
     analysis.save
     
@@ -126,8 +130,9 @@ class KbioMhciiWorker
     result = Result.new()
     result.location = @output_file
     result.output = @cluster_file
+    result.output2 = @cluster_file_summary;
     result.analysis = analysis
-
+    current_user = User.find(user_id)
     puts "post processing"
     puts @output_file
     puts @processing_file
@@ -167,11 +172,14 @@ class KbioMhciiWorker
   end
 
   def update_dashboard_info(time, user_id)
+    current_user = User.find(user_id)
     dashboard = current_user.dashboard
     curr_data = dashboard.execution_time
+    analysis_num = dashboard.analysis_count + 1
+    dashboard.analysis_count = analysis_num 
     dashboard.execution_time = curr_data + time
     avg = dashboard.avg_time
-    dashboard.avg_time = (avg + time) / dashboard.analysis_count
+    dashboard.avg_time = (avg + time) / analysis_num
     dashboard.save
   end
 

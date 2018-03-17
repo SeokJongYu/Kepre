@@ -25,7 +25,7 @@ class KbioMhciResultController < ApplicationController
     @analysis = Analysis.find(params[:analysis_id])
     @seq = @analysis.datum
 
-    pdf = ReportPdf.new(@analysis, @rawdata, @seq)
+    pdf = ReportPdf.new(@analysis, @rawdata, @seq,  "MHC I")
     send_data pdf.render, filename: "analysis_report.pdf", type: "application/pdf" , disposition: "inline"
   end
 
