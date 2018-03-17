@@ -20,6 +20,8 @@ class DataController < ApplicationController
   def show
     @analyses = Analysis.where( datum_id: @datum.id)
     @fasta = Bio::FastaFormat.new(@datum.content)
+    @donut_data = @fasta.aaseq.composition.map { |seq, comp| {"label" => seq, "value" => comp}}
+
   end
 
   # GET /data/new
