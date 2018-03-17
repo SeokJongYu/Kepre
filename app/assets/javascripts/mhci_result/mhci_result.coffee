@@ -7,7 +7,7 @@ $(document).on 'turbolinks:load', ->
     Morris.Line
       element: 'MHCI_chart'
       data: $('#MHCI_chart').data('results')
-      xkey: 'id'
+      xkey: 'percentile_rank'
       ykeys: ['percentile_rank','ann_rank','smm_rank']
       labels: ['percentile_rank','ann_rank','smm_rank']
       parseTime: false
