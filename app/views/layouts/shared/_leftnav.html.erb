@@ -26,7 +26,7 @@
     <ul class="nav side-menu">
       <li><a><i class="fa fa-home"></i> Projects <span class="fa fa-chevron-down"></span></a>
         <ul class="nav child_menu">
-          <li><a href="/projects"><i class="fa fa-cubes"></i>Project Dashboard</a></li>
+          <li><a href="/projects"><i class="fa fa-tachometer"></i>Project Dashboard</a></li>
           <% if user_signed_in? %>
             <% @user_projects.each do |project| %>
               <li><%= link_to "<i class='fa fa-cube'></i>#{project.title}".html_safe, project %></li>

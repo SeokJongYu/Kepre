@@ -121,8 +121,7 @@ class KbioMhciiWorker
   end
 
   def post_processing(analysis, user_id)
-    puts user_id
-    puts "----------"
+
     analysis.status = "Post processing"
     analysis.save
     
