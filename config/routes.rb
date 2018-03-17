@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+
   devise_for :users
 
   get 'kbio_mhci_result/show'
@@ -22,6 +23,8 @@ Rails.application.routes.draw do
 
   get 'mhcii_result/show'
   get 'mhcii_result/plot'
+
+  get 'jobs/show'
 
   resources :projects do
     resources :data
