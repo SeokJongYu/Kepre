@@ -8,26 +8,31 @@
   <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
     <span class="count_top"><i class="fa fa-archive"></i> Total Project</span>
     <div class="count"><%= @dashboard.project_count %></div>
-    <span class="count_bottom">last access <i class="green"><%= @dashboard.updated_at.strftime("%b %e %Y")%></i> </span>
+    <span class="count_bottom"></span>
   </div>
   <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-    <span class="count_top"><i class="fa fa-clock-o"></i> Total analysis</span>
+    <span class="count_top"><i class="fa fa-file-o"></i> Total Data</span>
+    <div class="count"><%= @dashboard.total_data %></div>
+    <span class="count_bottom"></span>
+  </div>
+  <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
+    <span class="count_top"><i class="fa fa-flash"></i> Total analysis</span>
     <div class="count"><%= @dashboard.analysis_count %></div>
     <span class="count_bottom"></span>
   </div>
   <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-    <span class="count_top"><i class="fa fa-flash"></i> Average Execution Time</span>
-    <div class="count"><%= @dashboard.avg_time %></div>
+    <span class="count_top"><i class="fa fa-cog"></i> Average Execution Time(sec)</span>
+    <div class="count"><%= @dashboard.avg_time.round(2) %></div>
     <span class="count_bottom"></span>
   </div>
   <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-    <span class="count_top"><i class="fa fa-clock-o"></i> Total Running Time</span>
-    <div class="count"><%= @dashboard.execution_time %></div>
+    <span class="count_top"><i class="fa fa-clock-o"></i> Total Running Time(min)</span>
+    <div class="count"><%= @dashboard.execution_time/60 %></div>
     <span class="count_bottom"></span>
   </div>
   <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
-    <span class="count_top"><i class="fa fa-flash"></i> Total Data</span>
-    <div class="count"><%= @dashboard.total_data %></div>
+    <span class="count_top"><i class="fa fa-hand-o-down"></i> Last access </span>
+    <div class="count"><%= @dashboard.updated_at.strftime("%b %e %Y")%></div>
     <span class="count_bottom"></span>
   </div>
 </div>
