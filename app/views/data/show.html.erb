@@ -149,15 +149,15 @@
                           <ul class="list-unstyled project_files">
                             <li><i class="fa fa-file-word-o"></i> Length : <%= @fasta.length %>
                             </li>
-                            <li><i class="fa fa-file-pdf-o"></i> Composition : <%= @fasta.aaseq.composition %>
+                            <li><i class="fa fa-file-word-o"></i> MW : <%= @fasta.aaseq.molecular_weight %>
                             </li>
-
+                            <li><i class="fa fa-file-pdf-o"></i> Composition : 
+                            </li>
+                            <%= content_tag :div, "", id: "seq_chart", style: "height: 200px;", data: {results: @donut_data} %>
                           </ul>
                           <br />
                         </div>
-
                       </section>
-
                     </div>
                     <!-- end project-detail sidebar -->
 
