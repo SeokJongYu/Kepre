@@ -37,7 +37,7 @@ class AnalysisStepsController < ApplicationController
         analysis.description = @desc
         analysis.datum = @datum
         analysis.project = @project
-        
+        analysis.status = "Prepare"
         analysis.save
 
         # create tool_item and tool instance
