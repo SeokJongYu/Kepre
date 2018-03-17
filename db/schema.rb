@@ -206,6 +206,9 @@ ActiveRecord::Schema.define(version: 20180226234503) do
     t.string "nn_align_core"
     t.decimal "nn_align_ic50", precision: 10, scale: 5
     t.decimal "nn_align_rank", precision: 10, scale: 5
+    t.string "netmhciipan_core"
+    t.decimal "netmhciipan_ic50", precision: 10, scale: 5
+    t.decimal "netmhciipan_rank", precision: 10, scale: 5
     t.string "sturniolo_core"
     t.decimal "sturniolo_score", precision: 10, scale: 5
     t.decimal "sturniolo_rank", precision: 10, scale: 5

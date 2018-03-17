@@ -1,11 +1,12 @@
 require 'bio'
 
 class ReportPdf < Prawn::Document
-    def initialize(analysis, results, seq)
+    def initialize(analysis, results, seq, type)
         super(top_margin: 50)
         @analysis = analysis
         @results = results
         @seq = seq
+        @tool_type = type
         @fasta = Bio::FastaFormat.new(@seq.content)
         puts @fasta.aaseq
         @par_seq = @fasta.aaseq.to_s
@@ -19,7 +20,7 @@ class ReportPdf < Prawn::Document
     def print_cover
         move_down 120
         formatted_text_box(
-          [{ text: "MHC I binding prediction report\n", styles: [:bold], size: 30, :align => :center }], at: [20, cursor - 50]
+          [{ text: "#{@tool_type} binding prediction report\n", styles: [:bold], size: 30, :align => :center }], at: [20, cursor - 50]
         )
         move_down 10
 
@@ -55,7 +56,7 @@ class ReportPdf < Prawn::Document
         header = ["Seq position","peptide", "length","allele","ranke"]
         table_data << header
         @results.each do |item|
-            puts item.seq_id, item.aa, item.allele, item.score
+            #puts item.seq_id, item.aa, item.allele, item.score
             if @rank == 0
                 @allele = item.allele
                 @rank = item.score
@@ -67,7 +68,7 @@ class ReportPdf < Prawn::Document
                 @rank = item.score
             elsif (@rank != item.score or @allele != item.allele) and @rank != 0
 
-                puts @pos, @length
+                #puts @pos, @length
                 @pep_seq = @par_seq[@pos-1,@length]
                 #pep_seq = @fasta_seq.subseq(@pos,@length)
                 table_data << [@pos, @pep_seq, @length, @allele, @rank]
