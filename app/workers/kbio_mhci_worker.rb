@@ -1,6 +1,4 @@
 class KbioMhciWorker
-  require 'fileutils'
-  require 'csv'
 
   def exec(analysis_id, user_id)
     time_start = Time.new
