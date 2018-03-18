@@ -22,54 +22,77 @@
 
 <div class="row">
     <div class="col-md-12 col-sm-12 col-xs-12">
-        <div class="x_panel">
-            <div class="x_title">
-                <h2>Analysis Result for MHC I <small><%= @analysis.title %></small></h2>
-                <ul class="nav navbar-right panel_toolbox">
-                    <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                    </li>
-                    <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                    <ul class="dropdown-menu" role="menu">
-                        <li><a href="#">Settings 1</a>
-                        </li>
-                        <li><a href="#">Settings 2</a>
-                        </li>
-                    </ul>
-                    </li>
-                    <li><a class="close-link"><i class="fa fa-close"></i></a>
-                    </li>
-                </ul>
-                <div class="clearfix"></div>
-            </div>
-            <div class="x_content">
-                <p class="text-muted font-13 m-b-30">
-                <%= @analysis.description %>
-                </p>
-                <table id="datatable" class="table table-striped table-bordered">
-                    <thead>
-                    <tr>
-                        <th>seq id</th>
-                        <th>aa</th>
-                        <th>allele</th>
-                        <th>score</th>
-                    </tr>
-                    </thead>
-
-                    <tbody>
-
-                    <% @results.each do |result| %>
-                        <tr>
-                            <td><%= result.seq_id %></td>
-                            <td><%= result.aa %></td>
-                            <td><%= result.allele %></td>
-                            <td><%= result.score %></td>                                 
-                        </tr>
-                    <% end %>
-
-                    </tbody>
-                </table>
-            </div>
+    <div class="x_panel">
+        <div class="x_title">
+        <h2>Analysis Result for MHC I <small><%= @analysis.title %></small></h2>
+        <ul class="nav navbar-right panel_toolbox">
+            <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+            </li>
+            <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+            <ul class="dropdown-menu" role="menu">
+                <li><a href="#">Settings 1</a>
+                </li>
+                <li><a href="#">Settings 2</a>
+                </li>
+            </ul>
+            </li>
+            <li><a class="close-link"><i class="fa fa-close"></i></a>
+            </li>
+        </ul>
+        <div class="clearfix"></div>
         </div>
+        <div class="x_content">
+        <p class="text-muted font-13 m-b-30">
+        <%= @analysis.description %>
+        </p>
+        <table id="datatable" class="table table-striped table-bordered">
+            <thead>
+            <tr>
+                <th>allele</th>
+                <th>seq_num</th>
+                <th>start</th>
+                <th>end</th>
+                <th>length</th>
+                <th>peptide</th>
+                <th>method</th>
+                <th>percentile_rank</th>
+                <th>ann_ic50</th>
+                <th>ann_rank</th>
+                <th>smm_ic50</th>
+                <th>smm_rank</th>
+                <th>comblib_sidney2008_score</th>
+                <th>comblib_sidney2008_rank</th>
+                <th>netmhcpan_ic50</th>
+                <th>netmhcpan_rank</th>
+            </tr>
+            </thead>
+
+            <tbody>
+
+            <% @results.each do |result| %>
+                <tr>
+                    <td><%= result.allele %></td>
+                    <td><%= result.seq_num %></td>
+                    <td><%= result.start %></td>
+                    <td><%= result.end %></td>
+                    <td><%= result.length %></td>
+                    <td><%= result.peptide %></td>
+                    <td><%= result.method %></td>
+                    <td><%= result.percentile_rank %></td>
+                    <td><%= result.ann_ic50 %></td>
+                    <td><%= result.ann_rank %></td>
+                    <td><%= result.smm_ic50 %></td>
+                    <td><%= result.smm_rank %></td>
+                    <td><%= result.comblib_sidney2008_score %></td>
+                    <td><%= result.comblib_sidney2008_rank %></td>
+                    <td><%= result.netmhcpan_ic50 %></td>
+                    <td><%= result.netmhcpan_rank %></td>                                    
+                </tr>
+            <% end %>
+
+            </tbody>
+        </table>
     </div>
 </div>
+

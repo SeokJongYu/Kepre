@@ -1,7 +1,6 @@
 class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :authenticate_user!
-  before_action :get_projects
   protect_from_forgery with: :exception
 
   def configure_permitted_parameters
@@ -18,10 +17,6 @@ class ApplicationController < ActionController::Base
     end
 
     root_path
-  end
-
-  def get_projects
-    @user_projects = current_user.projects.last(5)
   end
   
 end
