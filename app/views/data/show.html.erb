@@ -86,6 +86,7 @@
                                   <%= link_to '<i class="fa fa-wrench"></i> Result Table'.html_safe, result_show_path(:tool_type => @tool_content, :result_id => result.id, :analysis_id => analysis.id ), :class=>"btn btn-primary" %>
                                   <%= link_to '<i class="fa fa-wrench"></i> Plot'.html_safe, result_plot_path(:tool_type => @tool_content, :result_id => result.id, :analysis_id => analysis.id ), :class=>"btn btn-primary" %>
                                     <% if @tool_content == "KBIO-MHC-I" or @tool_content == "KBIO-MHC-II" %>
+                                    <%= link_to '<i class="fa fa-wrench"></i> Result(summary)'.html_safe, result_summary_path(:tool_type => @tool_content, :result_id => result.id, :analysis_id => analysis.id ), :class=>"btn btn-primary" %>
                                     <%= link_to '<i class="fa fa-wrench"></i> Plot(summary)'.html_safe, result_plot2_path(:tool_type => @tool_content, :result_id => result.id, :analysis_id => analysis.id ), :class=>"btn btn-primary" %>
                                     <%= link_to '<i class="fa fa-wrench"></i> Report'.html_safe, result_report_path(:tool_type => @tool_content, :result_id => result.id, :analysis_id => analysis.id ), :class=>"btn btn-primary", :target => "_blank" %>
                                     <% end %>
