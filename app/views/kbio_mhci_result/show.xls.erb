@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?mso-application progid="Excel.Sheet"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet" 
+xmlns:x="urn:schemas-microsoft-com:office:excel" 
+xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet" 
+xmlns:html="http://www.w3.org/TR/REC-html40">
+<Worksheet ss:Name="Sheet1">
+<Table>
+<Column ss:Index="1" ss:AutoFitWidth="0" ss:Width="110"/>
+<Row>
+    <Cell><Data ss:Type="String">allele</Data></Cell>
+    <Cell><Data ss:Type="String">seq_num</Data></Cell>
+    <Cell><Data ss:Type="String">start</Data></Cell>
+    <Cell><Data ss:Type="String">end</Data></Cell>
+    <Cell><Data ss:Type="String">length</Data></Cell>
+    <Cell><Data ss:Type="String">peptide</Data></Cell>
+    <Cell><Data ss:Type="String">method</Data></Cell>
+    <Cell><Data ss:Type="String">percentile_rank</Data></Cell>
+    <Cell><Data ss:Type="String">ann_ic50</Data></Cell>
+    <Cell><Data ss:Type="String">ann_rank</Data></Cell>
+    <Cell><Data ss:Type="String">smm_ic50</Data></Cell>
+    <Cell><Data ss:Type="String">smm_rank</Data></Cell>
+    <Cell><Data ss:Type="String">comblib_sidney2008_score</Data></Cell>
+    <Cell><Data ss:Type="String">comblib_sidney2008_rank</Data></Cell>
+    <Cell><Data ss:Type="String">netmhcpan_ic50</Data></Cell>
+    <Cell><Data ss:Type="String">netmhcpan_rank</Data></Cell>
+</Row>
+<% @results.each do |result| %>
+<Row>
+    <Cell><Data ss:Type="String"><%= result.allele %></Data></Cell>
+    <Cell><Data ss:Type="Number"><%= result.seq_num %></Data></Cell>
+    <Cell><Data ss:Type="Number"><%= result.start %></Data></Cell>
+    <Cell><Data ss:Type="Number"><%= result.end %></Data></Cell>
+    <Cell><Data ss:Type="Number"><%= result.length %></Data></Cell>
+    <Cell><Data ss:Type="String"><%= result.peptide %></Data></Cell>
+    <Cell><Data ss:Type="String"><%= result.method %></Data></Cell>
+    <Cell><Data ss:Type="Number"><%= result.percentile_rank %></Data></Cell>
+    <Cell><Data ss:Type="Number"><%= result.ann_ic50 %></Data></Cell>
+    <Cell><Data ss:Type="Number"><%= result.ann_rank %></Data></Cell>
+    <Cell><Data ss:Type="Number"><%= result.smm_ic50 %></Data></Cell>
+    <Cell><Data ss:Type="Number"><%= result.smm_rank %></Data></Cell>
+    <Cell><Data ss:Type="Number"><%= result.comblib_sidney2008_score %></Data></Cell>
+    <Cell><Data ss:Type="Number"><%= result.comblib_sidney2008_rank %></Data></Cell>
+    <Cell><Data ss:Type="Number"><%= result.netmhcpan_ic50 %></Data></Cell>
+    <Cell><Data ss:Type="Number"><%= result.netmhcpan_rank %></Data></Cell>                    
+</Row>
+<% end %>
+</Table>
+</Worksheet>
+</Workbook>

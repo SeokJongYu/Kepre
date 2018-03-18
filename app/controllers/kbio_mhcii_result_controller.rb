@@ -2,6 +2,13 @@ class KbioMhciiResultController < ApplicationController
   def show
     @results = MhciiResult.where("result_id = ?", params[:result_id])
     @analysis = Analysis.find(params[:analysis_id])
+
+    respond_to do |format|
+      format.html
+      format.csv { send_data @results.to_csv}
+      format.xls #{ send_data @results.to_csv(col_sep: "\t")}
+    end
+
   end
 
   def summary

@@ -1,6 +1,4 @@
 class MhciiWorker
-  require 'fileutils'
-  require 'csv'
 
   def exec(analysis_id)
     #if you want get array arguments, just use *args

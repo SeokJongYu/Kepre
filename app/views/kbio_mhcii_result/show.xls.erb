@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?mso-application progid="Excel.Sheet"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet" 
+xmlns:x="urn:schemas-microsoft-com:office:excel" 
+xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet" 
+xmlns:html="http://www.w3.org/TR/REC-html40">
+<Worksheet ss:Name="Sheet1">
+<Table>
+<Column ss:Index="1" ss:AutoFitWidth="0" ss:Width="110"/>
+<Row>
+    <Cell><Data ss:Type="String">allele</Data></Cell>
+    <Cell><Data ss:Type="String">seq_num</Data></Cell>
+    <Cell><Data ss:Type="String">start</Data></Cell>
+    <Cell><Data ss:Type="String">end</Data></Cell>
+    <Cell><Data ss:Type="String">peptide</Data></Cell>
+    <Cell><Data ss:Type="String">method</Data></Cell>
+    <Cell><Data ss:Type="String">consensus_percentile_rank</Data></Cell>
+    <Cell><Data ss:Type="String">comblib_core</Data></Cell>
+    <Cell><Data ss:Type="String">comblib_score</Data></Cell>
+    <Cell><Data ss:Type="String">comblib_rank</Data></Cell>
+    <Cell><Data ss:Type="String">smm_align_core</Data></Cell>
+    <Cell><Data ss:Type="String">smm_align_ic50</Data></Cell>
+    <Cell><Data ss:Type="String">smm_align_rank</Data></Cell>
+    <Cell><Data ss:Type="String">nn_align_core</Data></Cell>
+    <Cell><Data ss:Type="String">nn_align_ic50</Data></Cell>
+    <Cell><Data ss:Type="String">nn_align_rank</Data></Cell>
+    <Cell><Data ss:Type="String">netmhciipan_core</Data></Cell>
+    <Cell><Data ss:Type="String">netmhciipan_ic50</Data></Cell>
+    <Cell><Data ss:Type="String">netmhciipan_rank</Data></Cell>
+    <Cell><Data ss:Type="String">sturniolo_core</Data></Cell>
+    <Cell><Data ss:Type="String">sturniolo_score</Data></Cell>
+    <Cell><Data ss:Type="String">sturniolo_rank</Data></Cell>
+</Row>
+<% @results.each do |result| %>
+<Row>
+    <Cell><Data ss:Type="String"><%= result.allele %></Data></Cell>
+    <Cell><Data ss:Type="Number"><%= result.seq_num %></Data></Cell>
+    <Cell><Data ss:Type="Number"><%= result.start %></Data></Cell>
+    <Cell><Data ss:Type="Number"><%= result.end %></Data></Cell>
+    <Cell><Data ss:Type="String"><%= result.peptide %></Data></Cell>
+    <Cell><Data ss:Type="String"><%= result.method %></Data></Cell>
+    <Cell><Data ss:Type="Number"><%= result.consensus_percentile_rank %></Data></Cell>
+    <Cell><Data ss:Type="String"><%= result.comblib_core %></Data></Cell>
+    <Cell><Data ss:Type="Number"><%= result.comblib_score %></Data></Cell>
+    <Cell><Data ss:Type="Number"><%= result.comblib_rank %></Data></Cell>
+    <Cell><Data ss:Type="String"><%= result.smm_align_core %></Data></Cell>
+    <Cell><Data ss:Type="Number"><%= result.smm_align_ic50 %></Data></Cell>
+    <Cell><Data ss:Type="Number"><%= result.smm_align_rank %></Data></Cell>
+    <Cell><Data ss:Type="String"><%= result.nn_align_core %></Data></Cell>
+    <Cell><Data ss:Type="Number"><%= result.nn_align_ic50 %></Data></Cell>
+    <Cell><Data ss:Type="Number"><%= result.nn_align_rank %></Data></Cell>
+    <Cell><Data ss:Type="String"><%= result.netmhciipan_core %></Data></Cell>
+    <Cell><Data ss:Type="Number"><%= result.netmhciipan_ic50 %></Data></Cell>
+    <Cell><Data ss:Type="Number"><%= result.netmhciipan_rank %></Data></Cell>                   
+    <Cell><Data ss:Type="String"><%= result.sturniolo_core %></Data></Cell>
+    <Cell><Data ss:Type="Number"><%= result.sturniolo_score %></Data></Cell>
+    <Cell><Data ss:Type="Number"><%= result.sturniolo_rank %></Data></Cell>                   
+</Row>
+<% end %>
+</Table>
+</Worksheet>
+</Workbook>
