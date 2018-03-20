@@ -2,7 +2,8 @@ class KbioMhciiResultController < ApplicationController
   def show
     @results = MhciiResult.where("result_id = ?", params[:result_id])
     @analysis = Analysis.find(params[:analysis_id])
-
+    @project = @analysis.project
+    @datum = @analysis.datum
     respond_to do |format|
       format.html
       format.csv { send_data @results.to_csv}
@@ -14,18 +15,24 @@ class KbioMhciiResultController < ApplicationController
   def summary
     @results = KbioMhciiResult.where("result_id = ?", params[:result_id])
     @analysis = Analysis.find(params[:analysis_id])
+    @project = @analysis.project
+    @datum = @analysis.datum
   end
 
   def plot
     @results = Result.find_by_id(params[:result_id])
     @json = read_file(@results.output)
     @analysis = Analysis.find(params[:analysis_id])
+    @project = @analysis.project
+    @datum = @analysis.datum
   end
 
   def plot2
     @results = Result.find_by_id(params[:result_id])
     @json = read_file(@results.output2)
     @analysis = Analysis.find(params[:analysis_id])
+    @project = @analysis.project
+    @datum = @analysis.datum
   end
 
 
