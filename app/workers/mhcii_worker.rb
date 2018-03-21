@@ -1,12 +1,15 @@
 class MhciiWorker
 
   def exec(analysis_id)
+    time_start = Time.new
     #if you want get array arguments, just use *args
     # create input file in user's project directory 
     # define the args that is relayed from wicked wizard process
     # it should the analysis id as serialized arguments and placed into the Redis queue
     
     analysis = Analysis.find(analysis_id)
+    user = analysis.project.user
+    user_id = user.id
     # make input file
     create_data(analysis)
     # make run.sh script
@@ -16,6 +19,10 @@ class MhciiWorker
     # monitoring analysis job and do post processing
     poll_job(analysis)
     post_processing(analysis)
+
+    time_finish = Time.new
+    diff = time_finish - time_start
+    update_dashboard_info(diff, user_id)
 
   end
 
@@ -125,4 +132,15 @@ class MhciiWorker
     
   end
 
+  def update_dashboard_info(time, user_id)
+    current_user = User.find(user_id)
+    dashboard = current_user.dashboard
+    curr_data = dashboard.execution_time
+    analysis_num = dashboard.analysis_count + 1
+    dashboard.analysis_count = analysis_num 
+    dashboard.execution_time = curr_data + time
+    dashboard.avg_time = (curr_data + time) / analysis_num
+    dashboard.save
+  end
+  
 end

@@ -176,7 +176,7 @@ class KbioMhciiWorker
     dashboard.analysis_count = analysis_num 
     dashboard.execution_time = curr_data + time
     avg = dashboard.avg_time
-    dashboard.avg_time = (avg + time) / analysis_num
+    dashboard.avg_time = (curr_data + time) / analysis_num
     dashboard.save
   end
 
