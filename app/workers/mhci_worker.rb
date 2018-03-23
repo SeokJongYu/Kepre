@@ -29,8 +29,8 @@ class MhciWorker
     datum = analysis.datum
     project = analysis.project
 
-    @dir_str = "/home/codegen/tmp/kepre/" + project.title + "/" + analysis.id.to_s
-    @file_str = @dir_str + '/' + datum.name 
+    @dir_str = "/home/codegen/tmp/kepre/" + project.title.delete(' ') + "/" + analysis.id.to_s
+    @file_str = @dir_str + '/' + datum.name.delete(' ')
     FileUtils::mkdir_p @dir_str
     File.open(@file_str, "w") {|f| f.write(datum.content)}
   end
@@ -83,9 +83,9 @@ class MhciWorker
     stat_server = "submit"
     until stat_server == "Done"  do
       @stat = @b.get_job(job_id)
-      puts @stat.to_yaml
-      puts ">>>>>"
-      puts job_id
+      # puts @stat.to_yaml
+      # puts ">>>>>"
+      # puts job_id
       @stat.each_key {|key| puts key }
       val = @stat[job_id]
       stat_str = val[:job_state]
