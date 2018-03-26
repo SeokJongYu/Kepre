@@ -80,7 +80,11 @@
                   <tr>
                     <td><%= datum.id %></td>
                     <td><%= datum.name %></td>
+                    <% if datum.data_type == "FASTA" %>
                     <td><pre><%= datum.content %></pre></td>
+                    <% else %>
+                      <td><pre><%= datum.content[0,300] %> ... </pre></td>
+                    <% end %>
                     <td><%= datum.data_type %></td>
                     <td><%= link_to 'Show', project_datum_path(@project, datum.id), :class => "btn btn-sm btn-primary" %>
                     <%= link_to 'Edit', edit_project_datum_path(@project, datum), :class => "btn btn-sm btn-warning" %></td>
