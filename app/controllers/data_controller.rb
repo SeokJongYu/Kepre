@@ -39,7 +39,7 @@ class DataController < ApplicationController
 
     flag = 0
     count = 0
-    if params[:datum][:content] != nil
+    if params[:datum][:content] != nil and params[:datum][:data_type] =="FASTA"
 
       fasta_cont = StringIO.new(params[:datum][:content])
       seqs = Bio::FlatFile.auto(fasta_cont)
@@ -72,7 +72,17 @@ class DataController < ApplicationController
         end
       end
 
+    elsif params[:datum][:data_type] =="PDB"
+
+      @datum = @project.data.new(datum_params)
+      if @datum.save
+        flag = 1
+        count = 1
+      end
+
     end
+
+
 
     respond_to do |format|
       if flag #@datum.save
